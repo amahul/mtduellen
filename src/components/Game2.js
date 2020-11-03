@@ -6,9 +6,11 @@ import {
   TouchableWithoutFeedback,
   ImageBackground,
   Image,
+  Animated,
+  Easing,
+  Button,
 } from 'react-native';
 
-import Character from './Character';
 import Popup from './Popup';
 import Launcher from './Launcher';
 import Counter from './Counter';
@@ -24,8 +26,8 @@ class Game2 extends Component {
     secondModal: false,
     firstTimer: false,
     showLauncher: false,
-    velocity: 1.5,
-    yPos: 150,
+    velocity: 0,
+    yPos: 150 + 200,
     jumping: false,
   };
 
@@ -61,35 +63,48 @@ class Game2 extends Component {
     });
   };
 
-  jump = () => {
-    this.setState({
-      velocity: 20,
-      jumping: true,
-      yPos: this.state.velocity * 5 + 10,
-    });
+  constructor() {
+    super();
+    this.animatedValue = new Animated.Value(0);
+  }
+
+  animate = () => {
+    if (this.state.secondTimer && this.state.jumping == false) {
+      this.setState({
+        jumping: true,
+      });
+      this.animatedValue.setValue(0);
+      Animated.timing(this.animatedValue, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: false,
+        easing: Easing.linear,
+      }).start(() =>
+        this.setState({
+          jumping: false,
+        }),
+      );
+    }
   };
 
   render() {
-    const xPos = 30;
-    const gameTimer = 5;
+    const gameTimer = 50;
     const gameInstruction = 'Tryck på knappen så många gånger du kan';
     let endText = 'Du fick ' + this.state.count + ' poäng';
 
-    if (this.state.yPos > 150) {
-      this.setState({
-        jumping: false,
-      });
-    }
+    const movingMargin = this.animatedValue.interpolate({
+      inputRange: [0, 0.5, 1],
+      outputRange: [0, -150, 0],
+    });
 
     return (
       <ImageBackground
         source={background}
         resizeMode="cover"
         style={styles.image}>
-        <TouchableWithoutFeedback onPress={this.jump}>
+        <TouchableWithoutFeedback onPress={() => this.animate()}>
           <View style={styles.container}>
             {/* GAME COUNTER */}
-            <Text style={styles.text}>{this.state.yPos}</Text>
             <Counter
               seconds={gameTimer}
               running={this.state.secondTimer}
@@ -98,19 +113,29 @@ class Game2 extends Component {
 
             {/* MINIGAME CONTENT */}
 
-            {/* <Character xPos={xPos} yPos={this.state.yPos}></Character> */}
-            <Image
-              source={character}
-              style={[
-                {
-                  left: xPos,
-                  top: this.state.yPos,
-                  resizeMode: 'contain',
-                  height: 350,
-                  width: 150,
-                },
-              ]}
-            />
+            <Animated.View
+              style={{
+                marginTop: movingMargin,
+                height: 250,
+                width: 100,
+                left: 40,
+                top: 150,
+                backgroundColor: 'orange',
+              }}>
+              {/* <Image
+                source={character}
+                style={[
+                  {
+                    left: xPos,
+                    top: 0,
+                    resizeMode: 'contain',
+                    height: 350,
+                    width: 150,
+                  },
+                ]}
+              /> */}
+            </Animated.View>
+
             {/* MINIGAME CONTENT END */}
 
             {/* FIRST MODAL */}

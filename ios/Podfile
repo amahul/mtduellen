@@ -8,6 +8,8 @@ target 'MTDuellen' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RNSoundPlayer', :path => '../node_modules/react-native-sound-player'
+
   target 'MTDuellenTests' do
     inherit! :complete
     # Pods for testing
