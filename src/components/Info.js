@@ -6,7 +6,7 @@ import general from './components/content/general.json';
 const Info = () => {
   return (
     <View style={styles.container}>
-      <Text style={style.text}>{general.game1}</Text>
+      <Text style={style.text}>{general.game1}"Hejjjj"</Text>
     </View>
   );
 };
