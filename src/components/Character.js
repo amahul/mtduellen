@@ -12,7 +12,7 @@ const Info = ({xPos, yPos}) => {
           left: xPos,
           top: yPos,
           resizeMode: 'contain',
-          height: 350,
+          height: 380,
           width: 150,
         },
       ]}
