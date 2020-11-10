@@ -88,7 +88,7 @@ class Game2 extends Component {
   };
 
   render() {
-    const gameTimer = 5;
+    const gameTimer = 50;
     const gameInstruction = 'Tryck på knappen så många gånger du kan';
     let endText = 'Du fick ' + this.state.count + ' poäng';
 
@@ -150,7 +150,7 @@ class Game2 extends Component {
 
             {/* SECOND MODAL */}
             {this.state.secondModal && (
-              <Popup content={endText} button={false} link={true} action="/Candy" />
+              <Popup content={endText} button={false} link={true} action="/" />
             )}
 
             {/* LAUNCHER */}
