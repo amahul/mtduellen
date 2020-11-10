@@ -30,6 +30,9 @@ class Home extends Component {
             <Link to="/Candy">
               <Text style={styles.text}>Spel nr3 </Text>
             </Link>
+            <Link to="/Flappy">
+              <Text style={styles.text}>Flappy</Text>
+            </Link>
           </View>
         </ImageBackground>
       </View>
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 160,
     height: 170,
-    top: 10
+    top: 10,
   },
   image: {
     paddingTop: 20,
