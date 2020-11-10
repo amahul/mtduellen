@@ -9,7 +9,9 @@ import SoundPlayer from 'react-native-sound-player';
 import Candy from './src/components/CatchTheCandy';
 
 class App extends Component {
+
   render() {
+    
     try {
       // play the file tone.mp3
       SoundPlayer.playSoundFile('loop', 'wav');

@@ -1,18 +1,25 @@
 import React, {Component} from 'react';
-import {ImageBackground, View, Text, Image, StyleSheet} from 'react-native';
+import {ImageBackground, View, Text, Image, StyleSheet } from 'react-native';
 
 import {Link, useParams} from 'react-router-native';
 
 import logo from '../bilder/logo_3.png';
 import background from '../bilder/backgroundCandy.png';
 
+import './Storage.js';
+
+const store = require('./Storage')
+
 class Home extends Component {
+  state = {
+    score: '0',
+  };
   render() {
+
     return (
       <View style={styles.container}>
         <ImageBackground source={background} style={styles.image}>
           <Image source={logo} style={styles.logo} />
-
           <View style={styles.button}>
             <Link to="/Tap">
               <Text style={styles.text}>Spela</Text>
