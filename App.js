@@ -6,6 +6,7 @@ import Home from './src/components/Home';
 import TapTheButton from './src/components/TapTheButton';
 import Game2 from './src/components/Game2';
 import SoundPlayer from 'react-native-sound-player';
+import Candy from './src/components/CatchTheCandy';
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/Tap" component={TapTheButton} />
             <Route exact path="/Second" component={Game2} />
+            <Route exact path="/Candy" component={Candy} />
           </Switch>
         </View>
       </NativeRouter>

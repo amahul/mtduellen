@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {ImageBackground, View, Text, Image, StyleSheet} from 'react-native';
 
-import {Link} from 'react-router-native';
+import {Link, useParams} from 'react-router-native';
 
 import logo from '../bilder/logo_3.png';
-import background from '../bilder/fairBackground.jpg';
+import background from '../bilder/backgroundCandy.png';
 
 class Home extends Component {
   render() {
@@ -19,6 +19,9 @@ class Home extends Component {
             </Link>
             <Link to="/Second">
               <Text style={styles.text}>Spel nr2 </Text>
+            </Link>
+            <Link to="/Candy">
+              <Text style={styles.text}>Spel nr3 </Text>
             </Link>
           </View>
         </ImageBackground>
@@ -37,6 +40,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 160,
     height: 170,
+    top: 10
   },
   image: {
     paddingTop: 20,
@@ -50,6 +54,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(236,102,17)',
     padding: 25,
     borderRadius: 20,
+    top: 80,
   },
   text: {
     fontSize: 40,
