@@ -1,18 +1,25 @@
 import React, {Component} from 'react';
-import {ImageBackground, View, Text, Image, StyleSheet} from 'react-native';
+import {ImageBackground, View, Text, Image, StyleSheet } from 'react-native';
 
 import {Link, useParams} from 'react-router-native';
 
 import logo from '../bilder/logo_3.png';
 import background from '../bilder/backgroundCandy.png';
 
+import './Storage.js';
+
+const store = require('./Storage')
+
 class Home extends Component {
+  state = {
+    score: '0',
+  };
   render() {
+
     return (
       <View style={styles.container}>
         <ImageBackground source={background} style={styles.image}>
           <Image source={logo} style={styles.logo} />
-
           <View style={styles.button}>
             <Link to="/Tap">
               <Text style={styles.text}>Spela</Text>
@@ -22,6 +29,9 @@ class Home extends Component {
             </Link>
             <Link to="/Candy">
               <Text style={styles.text}>Spel nr3 </Text>
+            </Link>
+            <Link to="/Flappy">
+              <Text style={styles.text}>Flappy</Text>
             </Link>
           </View>
         </ImageBackground>
@@ -40,7 +50,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 160,
     height: 170,
-    top: 10
+    top: 10,
   },
   image: {
     paddingTop: 20,
