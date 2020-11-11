@@ -1,4 +1,4 @@
-import React, {Component ,useState} from 'react';
+import React, {Component} from 'react';
 import {View,
     Text,
     StyleSheet,
@@ -9,17 +9,29 @@ import {View,
     Animated,
     Easing,
     Button,
-    Pressable} from 'react-native';
+    Pressable,
+    AppState} from 'react-native';
+import {GameEngine , entities, Score } from 'react-native-game-engine';
+//import {randomInt} from 'random-int';
 
-import {Link} from 'react-router-native';
 
 import Popup from './Popup';
 import Launcher from './Launcher';
 import Counter from './Counter';
 import background from '../bilder/backgroundCandy.png';
 import basket from '../bilder/wicker-basket/basket.png';
+import lollipop from '../bilder/lollipop.png';
+import Physics from './Physics';
+import Tilt from './Tilt';
+import Trajectory from './Trajectory';
+import { Lollipop } from './Candy';
 
-class Candy extends Component {
+class CatchTheCandy extends Component {
+
+  constructor() {
+    super();
+  };
+
   state = {
     count: 0,
     size: 30,
@@ -28,10 +40,6 @@ class Candy extends Component {
     secondModal: false,
     firstTimer: false,
     showLauncher: false,
-    velocity: 0,
-    yPos: 150 + 200,
-    jumping: false,
-    changeColor: new Animated.Value(1),
     useNativeDriver: true
   };
 
@@ -67,101 +75,84 @@ class Candy extends Component {
     });
   };
 
-//   constructor() {
-//     super();
-//     this.animatedValue = new Animated.Value(0);
-//   }
+  getLollipop = () => {
+    const body = Matter.Bodies.rectangle(randomInt(1, width - 50), randomInt(0, -200), 75, 45, {
+      frictionAir: 0.05,
+      label: 'obstacle',
+      trajectory: randomInt(-5, 5) / 10,
+    });
+    const lollipop = { body, size: [75, 50], renderer: Lollipop };
 
-  animate = () => {
-    // if (this.state.secondTimer && this.state.jumping == false) {
-    //   this.setState({
-    //     jumping: true,
-    //   });
-    //   this.animatedValue.setValue(0);
-    //   Animated.timing(this.animatedValue, {
-    //     toValue: 1,
-    //     duration: 500,
-    //     useNativeDriver: false,
-    //     easing: Easing.linear,
-    //   }).start(() =>
-    //     this.setState({
-    //       jumping: false,
-    //     }),
-    //   );
-    // }
+    return { obstacle: lollipop, body };
   };
-
-
-toBlue = () => {
-    Animated.timing(this.state.changeColor, {
-        toValue: 0,
-        duration: 2000
-    }).start();
-}
-  
 
   render() {
     const gameTimer = 15;
     const gameInstruction = 'Fånga godis i din korg genom att tilta mobilen';
     let endText = 'Du fick ' + this.state.count + ' poäng';
 
-        return (
-            <ImageBackground source={background} resizeMode="cover" style={styles.image}>
+    const { showOverlay, entities, score, appState } = this.state;
 
-                <TouchableWithoutFeedback >
-                    <View style={styles.container}>
+    return (
+      <ImageBackground source={background} resizeMode="cover" style={styles.image}>
+        <TouchableWithoutFeedback >
+          <View style={styles.container}>
+            {/* GAME COUNTER */}
+            <Counter
+            seconds={gameTimer}
+            running={this.state.secondTimer}
+            endGame={this.endGame}
+            />
 
-                
-                        {/* GAME COUNTER */}
-                        <Counter
-                        seconds={gameTimer}
-                        running={this.state.secondTimer}
-                        endGame={this.endGame}
-                        />
+            {/* ----------------- MINIGAME CONTENT --------------------- */}
+            <GameEngine
+            style={styles.container}
+            ref="engine"
+            systems={[Physics, Tilt, Trajectory]}
+            entities={entities}
+            running={appState === 'active'}
+            >
 
-                        {/* MINIGAME CONTENT */}
-                        <Animated.View onPress={() => this.toBlue()}
-                            style={[styles.green, {opacity: this.state.changeColor}]}>
-                                
-                        </Animated.View>
+              {item = new Lollipop}
 
-                        <Image source={basket} style={styles.basket}></Image>
+              <Image source={lollipop} style={styles.basket}></Image>
 
-                        <View style={styles.button}>
-                            <Button title="Press me!" onPress={this.toBlue} ></Button>
-                        </View>
+              <Image source={basket} style={styles.basket}></Image>
+            </GameEngine>
 
-                        {/* MINIGAME CONTENT END */}
-
-
-                        {/* FIRST MODAL */}
-                        {this.state.firstModal && (
-                        <Popup
-                            content={gameInstruction}
-                            button={true}
-                            link={false}
-                            action={this.startLauncher}
-                        />
-                        )}
-
-                        {/* SECOND MODAL */}
-                        {this.state.secondModal && (
-                        <Popup content={endText} button={false} link={true} action="/" />
-                        )}
-
-                        {/* LAUNCHER */}
-                        {this.state.showLauncher && (
-                        <Launcher
-                            running={this.state.firstTimer}
-                            startGame={this.startGame}
-                        />
-                        )}
-                    </View>
-                </TouchableWithoutFeedback>
-            </ImageBackground>
             
-        );
-    }
+
+            {/* ---------------- MINIGAME CONTENT END -------------------- */}
+
+
+            {/* FIRST MODAL */}
+            {this.state.firstModal && (
+            <Popup
+                content={gameInstruction}
+                button={true}
+                link={false}
+                action={this.startLauncher}
+            />
+            )}
+
+            {/* SECOND MODAL */}
+            {this.state.secondModal && (
+            <Popup content={endText} button={false} link={true} action="/" />
+            )}
+
+            {/* LAUNCHER */}
+            {this.state.showLauncher && (
+            <Launcher
+                running={this.state.firstTimer}
+                startGame={this.startGame}
+            />
+            )}
+          </View>
+        </TouchableWithoutFeedback>
+      </ImageBackground>
+        
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -209,25 +200,7 @@ const styles = StyleSheet.create({
     text: {
       fontSize: 40,
       textAlign: 'center',
-    },
-    blue: {
-        color: 'blue',
-        height: 100,
-        width: 100,
-        left: '40%',
-        top: 400,
-        borderRadius: 50,
-        backgroundColor: 'blue'
-    },
-    green: {
-        color: 'green',
-        height: 100,
-        width: 100,
-        left: '40%',
-        top: 400,
-        borderRadius: 50,
-        backgroundColor: 'green'
-    },
+    },    
     basket: {
         alignItems: 'center',
         top: 220,
@@ -236,4 +209,4 @@ const styles = StyleSheet.create({
   });
 
 
-export default Candy;
+export default CatchTheCandy;
