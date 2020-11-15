@@ -1,5 +1,5 @@
 {
-  "name": "MTDuellen",
+  "name": "mtduellen",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -45,5 +45,17 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amahul/mtduellen.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amahul/mtduellen/issues"
+  },
+  "homepage": "https://github.com/amahul/mtduellen#readme",
+  "description": ""
 }
