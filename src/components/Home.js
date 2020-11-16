@@ -120,9 +120,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 40,
-    fontFamily: 'Helvetica-Bold',
-    color: '#2B2B2B',
-    justifyContent: 'center',
+    fontFamily: 'Helvetica Bold',
   },
 });
 

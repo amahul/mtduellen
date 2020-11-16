@@ -5,17 +5,18 @@ import {NativeRouter, Switch, Route} from 'react-router-native';
 import Home from './src/components/Home';
 import TapTheButton from './src/components/TapTheButton';
 import Game2 from './src/components/Game2';
+//import Info from './src/components/Info';
 import SoundPlayer from 'react-native-sound-player';
 import Candy from './src/components/CatchTheCandy';
 
 class App extends Component {
   render() {
-    try {
-      // play the file tone.mp3
-      SoundPlayer.playSoundFile('loop', 'wav');
-    } catch (e) {
-      console.log(`cannot play the sound file`, e);
-    }
+    // try {
+    //   // play the file tone.mp3
+    //   SoundPlayer.playSoundFile('loop', 'wav');
+    // } catch (e) {
+    //   console.log(`cannot play the sound file`, e);
+    // }
     return (
       <NativeRouter>
         <View style={styles.container}>
@@ -24,6 +25,8 @@ class App extends Component {
             <Route exact path="/Tap" component={TapTheButton} />
             <Route exact path="/Second" component={Game2} />
             <Route exact path="/Candy" component={Candy} />
+
+            {/* <Route exact path="/Info" component={Info} /> */}
           </Switch>
         </View>
       </NativeRouter>
