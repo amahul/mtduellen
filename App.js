@@ -6,8 +6,6 @@ import Home from './src/components/Home';
 import TapTheButton from './src/components/TapTheButton';
 import Game2 from './src/components/Game2';
 //import Info from './src/components/Info';
-import Candy from './src/components/CatchTheCandy';
-import Flappy from './src/components/Flappy.js';
 
 class App extends Component {
   render() {
@@ -24,9 +22,6 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/Tap" component={TapTheButton} />
             <Route exact path="/Second" component={Game2} />
-            <Route exact path="/Candy" component={Candy} />
-            {/* <Route exact path="/Flappy" component={Flappy} /> */}
-            {/* <Route exact path="/Info" component={Info} /> */}
           </Switch>
         </View>
       </NativeRouter>
