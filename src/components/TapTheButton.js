@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {View, Text, StyleSheet, TouchableWithoutFeedback, ImageBackground} from 'react-native';
 
 import {Link} from 'react-router-native';
 
 import Popup from './Popup';
 import Launcher from './Launcher';
 import Counter from './Counter';
+import background from '../bilder/homeBackground.png';
 
 class TapTheButton extends Component {
   state = {
@@ -66,6 +67,7 @@ class TapTheButton extends Component {
         )}
 
         {/* MINIGAME CONTENT */}
+        <ImageBackground source={background} style={styles.image}>
         <TouchableWithoutFeedback onPress={this.onPress}>
           <View style={styles.button} padding={this.state.size}>
             <Text style={styles.text}>{this.state.count}</Text>
@@ -75,6 +77,7 @@ class TapTheButton extends Component {
         <Link to="/" underlayColor="#f0f4f7">
           <Text>Hem</Text>
         </Link>
+        </ImageBackground>
 
         {/* MINIGAME CONTENT END */}
 
@@ -144,6 +147,14 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 40,
     textAlign: 'center',
+  },
+  image: {
+    paddingTop: 20,
+    flex: 1,
+    resizeMode: 'cover',
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    backgroundColor: 'white',
   },
 });
 
