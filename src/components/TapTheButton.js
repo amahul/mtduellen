@@ -7,6 +7,7 @@ import Popup from './Popup';
 import Launcher from './Launcher';
 import Counter from './Counter';
 import background from '../bilder/homeBackground.png';
+import arrow from '../bilder/arrow.png';
 
 class TapTheButton extends Component {
   state = {
@@ -79,6 +80,9 @@ class TapTheButton extends Component {
         </Link>
         </ImageBackground>
 
+        <View source={arrow}>
+          <Link to="/Tap"></Link>
+        </View>
         {/* MINIGAME CONTENT END */}
 
         {/* FIRST MODAL */}
