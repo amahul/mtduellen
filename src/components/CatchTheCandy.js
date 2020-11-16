@@ -21,10 +21,10 @@ import Counter from './Counter';
 import background from '../bilder/backgroundCandy.png';
 import basket from '../bilder/wicker-basket/basket.png';
 import lollipop from '../bilder/lollipop.png';
-import Physics from './Physics';
-import Tilt from './Tilt';
-import Trajectory from './Trajectory';
-import { Lollipop } from './Candy';
+import Physics from './Candy/Physics';
+import Tilt from './Candy/Tilt';
+import Trajectory from './Candy/Trajectory';
+import { Lollipop } from './Candy/Candy';
 
 class CatchTheCandy extends Component {
 

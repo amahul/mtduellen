@@ -1,4 +1,4 @@
-import {lollipop} from '../bilder/lollipop.png';
+import {lollipop} from '../../bilder/lollipop.png';
 
 const Lollipop = ({ body, size }) => {
     const { position } = body;
