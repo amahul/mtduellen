@@ -6,6 +6,7 @@ import {Link} from 'react-router-native';
 import Popup from './Popup';
 import Launcher from './Launcher';
 import Counter from './Counter';
+import arrow from '../bilder/arrow.png';
 
 class TapTheButton extends Component {
   state = {
@@ -70,10 +71,9 @@ class TapTheButton extends Component {
           </View>
         </TouchableWithoutFeedback>
 
-        <Link to="/" underlayColor="#f0f4f7">
-          <Text>Hem</Text>
-        </Link>
-
+        <View source={arrow}>
+          <Link to="/Tap"></Link>
+        </View>
         {/* MINIGAME CONTENT END */}
 
         {/* FIRST MODAL */}
