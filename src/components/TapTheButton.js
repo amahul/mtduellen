@@ -57,11 +57,13 @@ class TapTheButton extends Component {
     return (
       <View style={styles.container}>
         {/* GAME COUNTER */}
-        <Counter
-          seconds={gameTimer}
-          running={this.state.secondTimer}
-          endGame={this.endGame}
-        />
+        {this.state.secondTimer && (
+          <Counter
+            seconds={gameTimer}
+            running={this.state.secondTimer}
+            endGame={this.endGame}
+          />
+        )}
 
         {/* MINIGAME CONTENT */}
         <TouchableWithoutFeedback onPress={this.onPress}>

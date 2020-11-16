@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ImageBackground, View, Text, Image, StyleSheet } from 'react-native';
+import {ImageBackground, View, Text, Image, StyleSheet} from 'react-native';
 
 import {Link, useParams} from 'react-router-native';
 
@@ -8,14 +8,13 @@ import background from '../bilder/backgroundCandy.png';
 
 import './Storage.js';
 
-const store = require('./Storage')
+const store = require('./Storage');
 
 class Home extends Component {
   state = {
     score: '0',
   };
   render() {
-
     return (
       <View style={styles.container}>
         <ImageBackground source={background} style={styles.image}>
@@ -29,9 +28,6 @@ class Home extends Component {
             </Link>
             <Link to="/Candy">
               <Text style={styles.text}>Spel nr3 </Text>
-            </Link>
-            <Link to="/Flappy">
-              <Text style={styles.text}>Flappy</Text>
             </Link>
           </View>
         </ImageBackground>

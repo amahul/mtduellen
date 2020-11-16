@@ -1,5 +1,5 @@
 {
-  "name": "MTDuellen",
+  "name": "mtduellen",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@react-native-community/async-storage": "^1.12.1",
+    "@react-native-community/async-storage": "~1.12.0",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.7.6",
     "@react-navigation/stack": "^5.9.3",
@@ -45,5 +45,17 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amahul/mtduellen.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amahul/mtduellen/issues"
+  },
+  "homepage": "https://github.com/amahul/mtduellen#readme",
+  "description": ""
 }
