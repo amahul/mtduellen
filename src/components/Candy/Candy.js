@@ -1,4 +1,4 @@
-import lollipop from 'C:/Users/Amanda/Documents/KOMA/project/MTDuellen/src/bilder/lollipop.png';
+import lollipop from '../../bilder/lollipop.png';
 
 const Lollipop = ({body, size}) => {
   const {position} = body;

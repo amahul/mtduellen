@@ -29,6 +29,9 @@ class Home extends Component {
             <Link to="/Candy">
               <Text style={styles.text}>Spel nr3 </Text>
             </Link>
+            {/* <Link to="/Flappy">
+              <Text style={styles.text}>Flappy</Text>
+            </Link> */}
           </View>
         </ImageBackground>
       </View>
