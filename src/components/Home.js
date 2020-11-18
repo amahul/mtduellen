@@ -46,6 +46,8 @@ class Home extends Component {
   };
 
   render() {
+    let activeScore = store.readData();
+
     return (
       <ImageBackground style={styles.imageBackground}>
         <View style={styles.infoBtnHolder}>
@@ -69,10 +71,16 @@ class Home extends Component {
           <View style={styles.imgFlex2}>
             <Image
               source={highscoresExpanded}
-              style={{resizeMode:'stretch', width: 400, height: 400, bottom: 20} }
+              style={{
+                resizeMode: 'stretch',
+                width: 400,
+                height: 400,
+                margin: 5,
+              }}
             />
             
           </View>
+
           <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
             <Link to="/Tap">
               <Image
