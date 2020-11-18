@@ -17,7 +17,7 @@ import {Link} from 'react-router-native';
 
 import logo2 from '../bilder/logo_alt2.png';
 import highscores from '../bilder/highscore_dark.png';
-
+import highscoresExpanded from '../bilder/highscores_expanded.png';
 import play from '../bilder/play_dark.png';
 
 import Info from './Info';
@@ -70,8 +70,8 @@ class Home extends Component {
               <Text style={styles.text}>Spela</Text>
             </Link> */}
             <Image
-              source={highscores}
-              style={{width: 300, height: 70, bottom: 40, margin: 5}}
+              source={highscoresExpanded}
+              style={{resizeMode:'contain', width: 300, height: 200, bottom: 40, margin: 5}}
             />
             {/* <Image source={highscoresExpanded} style={{width: 300, height: 250, bottom: 40, margin:5}}/> */}
           </View>
