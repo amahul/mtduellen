@@ -6,27 +6,19 @@ const store = require('./Storage'); // Ska dessa vara kvar?
 import {
   ImageBackground,
   View,
-  Text,
   Image,
   StyleSheet,
-  Button,
-  Alert,
-  Pressable,
   TouchableOpacity,
-  Action,
 } from 'react-native';
 import icon from '../bilder/info_dark.png';
 
-import {Link, useParams, withRouter} from 'react-router-native';
-import LinearGradient from 'react-native-linear-gradient';
+import {Link} from 'react-router-native';
 
-import logo from '../bilder/logo_3.png';
 import logo2 from '../bilder/logo_alt2.png';
 import highscores from '../bilder/highscore_dark.png';
-import highscoresExpanded from '../bilder/highscore_expanded.png';
+
 import play from '../bilder/play_dark.png';
-import background from '../bilder/homeBackground.png';
-import Popup from './Popup';
+
 import Info from './Info';
 const information = 'Det är endast MT-studenter som kan delta i tävlingen';
 
@@ -54,31 +46,24 @@ class Home extends Component {
   render() {
     return (
       <ImageBackground style={styles.imageBackground}>
-        <View>
+        <View style={styles.infoBtnHolder}>
           <TouchableOpacity
-            style={{opacity: 0.9}}
+            style={styles.infoBtn}
             activeOpacity={0.5}
             onPress={this.openInfo}
             //style={styles.infoBtn}
             title="Info">
             <Image
               source={icon}
-              style={{width: 60, height: 60, bottom: 0, margin: 10, left: 340}}
+              style={{width: 70, height: 70, bottom: 0, margin: 30}}
             />
           </TouchableOpacity>
         </View>
 
         <View style={styles.container}>
-          {/* <TouchableOpacity onPress={this.openInfo} style={styles.infoBtn}>
-            <Text style={styles.text}>i</Text>
-          </TouchableOpacity> */}
           <View style={styles.logoContainer}>
             <Image source={logo2} style={styles.logo} />
           </View>
-          <View style={styles.logoContainer}>
-            {/* <Text style={styles.text, {color:'lightgrey', margin:10, fontSize:24}}>Vinn fina priser på mässdagen!</Text> */}
-          </View>
-
           <View>
             {/* <Link to="/Tap" style={styles.button}>
               <Text style={styles.text}>Spela</Text>
@@ -98,17 +83,6 @@ class Home extends Component {
               />
             </Link>
           </TouchableOpacity>
-
-          {/* <View style={{position:'relative', bottom: 100}} > 
-          <LinearGradient colors={['#F49D6C', '#EC6610', '#913305']} locations={[0.0,0.5,1]} style={styles.button}>
-              <Link to="/Tap">
-                <Text style={styles.text}>SPELA</Text>
-              </Link>
-              <Link to="/Second">
-                <Text style={styles.text}>Spel nr2 </Text>
-              </Link>
-             </LinearGradient>
-          </View>  */}
 
           {/* INFO MODAL */}
           <Info
@@ -134,16 +108,17 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     backgroundColor: '#13283C',
   },
+  infoBtnHolder: {
+    flex: 0.4,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
   infoBtn: {
-    backgroundColor: 'white',
-    borderRadius: 50,
-    width: 50,
-    top: 10,
-    left: '35%',
-    height: 50,
+    padding: 0,
+    opacity: 0.9,
   },
   logoContainer: {
-    top: 40,
+    top: 80,
     height: 100,
     flex: 1,
     // justifyContent: 'flex-start',
@@ -155,8 +130,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   logo: {
-    // width: 160,
-    // height: 170,
     width: 255,
     height: 190,
     top: 10,
@@ -164,14 +137,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 30,
     textAlign: 'center',
-  },
-  button: {
-    backgroundColor: 'rgb(236,102,17)',
-    paddingLeft: 100,
-    paddingRight: 100,
-    borderRadius: 70,
-    top: 80,
-    elevation: 10, // drop-shadow, funkar inte...
   },
   text: {
     padding: 15,
