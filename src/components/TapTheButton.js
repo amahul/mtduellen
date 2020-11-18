@@ -6,7 +6,6 @@ import {Link} from 'react-router-native';
 import Popup from './Popup';
 import Launcher from './Launcher';
 import Counter from './Counter';
-import arrow from '../bilder/arrow.png';
 
 class TapTheButton extends Component {
   state = {
@@ -65,39 +64,38 @@ class TapTheButton extends Component {
             endGame={this.endGame}
           />
         )}
-
         {/* MINIGAME CONTENT */}
         <TouchableWithoutFeedback onPress={this.onPress}>
           <View style={styles.button} padding={this.state.size}>
             <Text style={styles.text}>{this.state.count}</Text>
           </View>
         </TouchableWithoutFeedback>
-
-        <View source={arrow}>
-          <Link to="/Tap"></Link>
+        <View>
+          <Link to="/">
+            <Text>Tillbaka</Text>
+          </Link>
         </View>
         {/* MINIGAME CONTENT END */}
-
         {/* FIRST MODAL */}
-        {this.state.firstModal && (
-          <Popup
-            content={gameInstruction}
-            button={true}
-            link={false}
-            action={this.startLauncher}
-          />
-        )}
-
+        {/* {this.state.firstModal && ( */}
+        <Popup
+          content={gameInstruction}
+          button={true}
+          link={false}
+          action={this.startLauncher}
+          modalState={this.state.firstModal}
+        />
+        {/* )} */}
         {/* SECOND MODAL */}
-        {this.state.secondModal && (
-          <Popup
-            content={endText}
-            button={false}
-            link={true}
-            action="/Second"
-          />
-        )}
-
+        {/* {this.state.secondModal && ( */}
+        <Popup
+          content={endText}
+          button={false}
+          link={true}
+          action="/"
+          modalState={this.state.secondModal}
+        />
+        {/* )} */}
         {/* LAUNCHER */}
         {this.state.showLauncher && (
           <Launcher

@@ -6,15 +6,16 @@ import {
   Image,
   StyleSheet,
   Button,
-  Alert,
+  TouchableOpacity,
 } from 'react-native';
-import {Icon} from 'react-native-elements';
 
-import {Link, useParams, withRouter} from 'react-router-native';
+import {Link} from 'react-router-native';
 
 import logo from '../bilder/logo_3.png';
 import background from '../bilder/backgroundCandy.png';
-import Popup from './Popup';
+import Modal from 'react-native-modalbox';
+import Info from './Info';
+import {greaterThan} from 'react-native-reanimated';
 const information = 'Det är endast MT-studenter som kan delta i tävlingen';
 
 class Home extends Component {
@@ -30,45 +31,43 @@ class Home extends Component {
     }
   };
 
+  closeInfo = () => {
+    if (this.state.infoModal) {
+      this.setState({
+        infoModal: false,
+      });
+    }
+  };
+
   render() {
     return (
       <ImageBackground source={background} style={styles.imageBackground}>
-        <Button
-          onPress={() => Alert.alert('Simple Button pressed')}
+        {/* <Button
+          onPress={() => this.openInfo()}
           style={styles.infoBtn}
-          title="Info"></Button>
-        <Icon
-          reverse
-          name="ios-american-football"
-          type="ionicon"
-          color="#517fa4"
-        />
+          title="Info"
+        /> */}
+
         <View style={styles.container}>
+          <TouchableOpacity onPress={this.openInfo} style={styles.infoBtn}>
+            <Text style={styles.text}>i</Text>
+          </TouchableOpacity>
           <View style={styles.logoContainer}>
             <Image source={logo} style={styles.logo} />
           </View>
 
           <View>
             <Link to="/Tap" style={styles.button}>
-              <Text>Spela</Text>
-            </Link>
-            <Link to="/Second" style={styles.button}>
-              <Text>Spel nr2 </Text>
-            </Link>
-            <Link to="/Candy" style={styles.button}>
-              <Text>Spel nr3 </Text>
+              <Text style={styles.text}>Spela</Text>
             </Link>
           </View>
 
           {/* INFO MODAL */}
-          {this.state.infoModal && (
-            <Popup
-              content={information}
-              button={false}
-              link={true}
-              action="/"
-            />
-          )}
+          <Info
+            information={information}
+            modalState={this.state.infoModal}
+            closeInfo={this.closeInfo}
+          />
         </View>
       </ImageBackground>
     );
@@ -78,14 +77,9 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
     alignSelf: 'stretch',
-  },
-  container2: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'red',
   },
   imageBackground: {
     flex: 1,
@@ -93,17 +87,15 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   infoBtn: {
-    padding: 500,
-    left: 0,
-    color: 'white',
-    flex: 1,
-    width: 30,
+    backgroundColor: 'white',
+    borderRadius: 50,
+    width: 50,
+    top: 10,
+    left: '35%',
+    height: 50,
   },
   logoContainer: {
-    height: 100,
-    flex: 1,
-    // justifyContent: 'flex-start',
-    // alignItems: 'flex-start',
+    height: 200,
   },
   img: {
     width: '50%',
@@ -115,12 +107,15 @@ const styles = StyleSheet.create({
     height: 170,
     top: 10,
   },
+  text: {
+    fontSize: 30,
+    textAlign: 'center',
+  },
   button: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
     backgroundColor: 'rgb(236,102,17)',
     padding: 20,
     margin: 5,
+    top: 200,
     textAlign: 'center',
     borderRadius: 30,
     fontFamily: 'Helvetica Bold',

@@ -16,6 +16,7 @@
     "@react-navigation/stack": "^5.9.3",
     "AsyncStorage": "^0.1.5",
     "expo": "^39.0.4",
+    "gradle": "^1.2.3",
     "matter-js": "^0.14.2",
     "react": "16.13.1",
     "react-native": "0.63.3",
