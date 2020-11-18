@@ -59,41 +59,39 @@ class TapTheButton extends Component {
     let endText = 'Du fick ' + this.state.count + ' poäng';
     return (
       <View style={styles.container}>
-        {/* GAME COUNTER */}
+        {/* Back arrow */}
+        <View style={styles.counterContainer}>
+          <Link to="/">
+            <Image source={arrow} style={styles.icon}/>
+          </Link>
+
+          {/* GAME COUNTER */}
         {this.state.secondTimer && (
           <Counter
             seconds={gameTimer}
             running={this.state.secondTimer}
             endGame={this.endGame}
-            style={styles.counter}
           />
         )}
+        </View>
+
+        
 
         {/* MINIGAME CONTENT */}
         <ImageBackground  style={styles.image}>
 
-        <View style={{right: 160}}>
-          <Link to="/">
-            <Image source={arrow} style={styles.icon}/>
-          </Link>
-        </View>
-
         <TouchableWithoutFeedback onPress={this.onPress}>
           <View  style={{ width:this.state.size,
                           height:this.state.size}}>
-            <ImageBackground source={knapp} style={styles.button}>
+            <ImageBackground source={knapp} style={styles.button, styles.container}>
             <Text style={styles.text, {height: this.state.size}}>{this.state.count}</Text>
             </ImageBackground>
           </View>
         </TouchableWithoutFeedback>
-
-        <Link to="/" underlayColor="#f0f4f7">
-          <Text>Hem</Text>
-        </Link>
-
-        
+    
         </ImageBackground>
         {/* MINIGAME CONTENT END */}
+
 
         {/* FIRST MODAL */}
         {this.state.firstModal && (
@@ -130,18 +128,22 @@ class TapTheButton extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     width: '100%',
     backgroundColor: '#13283C',
   },
-  counter: {
-    color: 'white'
+  counterContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    color: 'white',
   },
   button: {
     alignItems: 'center',
     justifyContent: 'center',
     resizeMode: 'contain',
+    flex: 2,
   },
   modal: {
     position: 'relative',
@@ -163,12 +165,14 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 40,
     textAlign: 'center',
-    color: 'white'
+    color: 'white',
+    justifyContent: 'center',
   },
   image: {
     paddingTop: 20,
-    flex: 1,
+    flex: 4,
     resizeMode: 'cover',
+    justifyContent:'center',
     alignItems: 'center',
     alignSelf: 'stretch',
     backgroundColor: '#13283C',
@@ -176,6 +180,8 @@ const styles = StyleSheet.create({
   icon: {
     width:50,
     height: 50,
+    justifyContent: 'flex-end',
+    margin: 15,
   }
 });
 

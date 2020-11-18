@@ -85,7 +85,7 @@ class Home extends Component {
             activeOpacity={0.5}
             >
               {/* onPress={() => this.props.navigation.navigate("/Tap")} */}
-            <Link to="/Tap" >
+            <Link to="/Tap">
               <Image source={play} style={{width: 300, height: 70, bottom: 0, margin: 5}} />
             </Link>
           </TouchableOpacity>
