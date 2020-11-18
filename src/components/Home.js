@@ -9,13 +9,8 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
-  TouchableOpacity,
 } from 'react-native';
 
-import Modal from 'react-native-modalbox';
-import {greaterThan} from 'react-native-reanimated';
-
-import {Icon} from 'react-native-elements';
 import icon from '../bilder/info_dark.png';
 
 import {Link} from 'react-router-native';
