@@ -1,21 +1,32 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  ImageBackground,
+  Image,
+} from 'react-native';
 
 import {Link} from 'react-router-native';
 
 import Popup from './Popup';
 import Launcher from './Launcher';
 import Counter from './Counter';
+import background from '../bilder/homeBackground.png';
+import knapp from '../bilder/button2.png';
+import arrow from '../bilder/arrow.png';
 
 class TapTheButton extends Component {
   state = {
     count: 0,
-    size: 30,
+    size: 150,
+    fontSize: 40,
     secondTimer: false,
     firstModal: true,
     secondModal: false,
-    firstTimer: false,
-    showLauncher: false,
+    firstTimer: true,
+    showLauncher: true,
   };
 
   onPress = () => {
@@ -23,7 +34,8 @@ class TapTheButton extends Component {
     if (this.state.secondTimer) {
       this.setState({
         count: this.state.count + 1,
-        size: this.state.size + 2,
+        size: this.state.size + 5,
+        fontSize: this.state.fontSize + 1,
       });
     }
   };
@@ -56,46 +68,67 @@ class TapTheButton extends Component {
     let endText = 'Du fick ' + this.state.count + ' poäng';
     return (
       <View style={styles.container}>
-        {/* GAME COUNTER */}
-        {this.state.secondTimer && (
-          <Counter
-            seconds={gameTimer}
-            running={this.state.secondTimer}
-            endGame={this.endGame}
+        <View style={styles.counterContainer}>
+          <Link to="/">
+            <Image source={arrow} style={styles.icon} />
+          </Link>
+
+          {/* GAME COUNTER */}
+          <View style={(styles.counter, {justifyContent: 'center'})}>
+            {this.state.secondTimer && (
+              <Counter
+                seconds={gameTimer}
+                running={this.state.secondTimer}
+                endGame={this.endGame}
+              />
+            )}
+          </View>
+        </View>
+
+        {/* MINIGAME CONTENT */}
+        <ImageBackground style={styles.image}>
+          <TouchableWithoutFeedback onPress={this.onPress}>
+            <View style={{width: this.state.size, height: this.state.size}}>
+              <ImageBackground
+                source={knapp}
+                style={(styles.button, styles.container)}>
+                <Text
+                  style={
+                    (styles.text,
+                    {
+                      fontSize: this.state.fontSize,
+                      color: 'white',
+                      alignSelf: 'center',
+                    })
+                  }>
+                  {this.state.count}
+                </Text>
+              </ImageBackground>
+            </View>
+          </TouchableWithoutFeedback>
+        </ImageBackground>
+        {/* MINIGAME CONTENT END */}
+
+        {/* FIRST MODAL */}
+        {this.state.firstModal && (
+          <Popup
+            content={gameInstruction}
+            button={true}
+            link={false}
+            action={this.startLauncher}
           />
         )}
-        {/* MINIGAME CONTENT */}
-        <TouchableWithoutFeedback onPress={this.onPress}>
-          <View style={styles.button} padding={this.state.size}>
-            <Text style={styles.text}>{this.state.count}</Text>
-          </View>
-        </TouchableWithoutFeedback>
-        <View>
-          <Link to="/">
-            <Text>Tillbaka</Text>
-          </Link>
-        </View>
-        {/* MINIGAME CONTENT END */}
-        {/* FIRST MODAL */}
-        {/* {this.state.firstModal && ( */}
-        <Popup
-          content={gameInstruction}
-          button={true}
-          link={false}
-          action={this.startLauncher}
-          modalState={this.state.firstModal}
-        />
-        {/* )} */}
+
         {/* SECOND MODAL */}
-        {/* {this.state.secondModal && ( */}
-        <Popup
-          content={endText}
-          button={false}
-          link={true}
-          action="/"
-          modalState={this.state.secondModal}
-        />
-        {/* )} */}
+        {this.state.secondModal && (
+          <Popup
+            content={endText}
+            button={false}
+            link={true}
+            action="/Second"
+          />
+        )}
+
         {/* LAUNCHER */}
         {this.state.showLauncher && (
           <Launcher
@@ -111,15 +144,27 @@ class TapTheButton extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     width: '100%',
-    backgroundColor: 'whitesmoke',
+    backgroundColor: '#13283C',
+  },
+  counterContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    color: 'white',
+  },
+  counter: {
+    alignSelf: 'center',
+    flex: 4,
+    flexDirection: 'row',
   },
   button: {
     alignItems: 'center',
-    backgroundColor: 'orange',
-    borderRadius: 20,
+    justifyContent: 'center',
+    resizeMode: 'contain',
+    flex: 2,
   },
   modal: {
     position: 'relative',
@@ -135,13 +180,28 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.36,
     shadowRadius: 6.68,
-
     elevation: 11,
   },
 
   text: {
     fontSize: 40,
-    textAlign: 'center',
+    color: 'white',
+    alignSelf: 'center',
+  },
+  image: {
+    paddingTop: 20,
+    flex: 4,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    backgroundColor: '#13283C',
+  },
+  icon: {
+    width: 50,
+    height: 50,
+    justifyContent: 'flex-end',
+    margin: 15,
   },
 });
 
