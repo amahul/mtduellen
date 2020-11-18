@@ -25,7 +25,7 @@ class TapTheButton extends Component {
     secondTimer: false,
     firstModal: true,
     secondModal: false,
-    firstTimer: true,
+    firstTimer: false,
     showLauncher: true,
   };
 
@@ -35,7 +35,7 @@ class TapTheButton extends Component {
       this.setState({
         count: this.state.count + 1,
         size: this.state.size + 5,
-        fontSize: this.state.fontSize +1,
+        fontSize: this.state.fontSize + 1,
       });
     }
   };
@@ -84,7 +84,6 @@ class TapTheButton extends Component {
             )}
           </View>
         </View>
-
         {/* MINIGAME CONTENT */}
         <ImageBackground style={styles.image}>
           <TouchableWithoutFeedback onPress={this.onPress}>
@@ -108,27 +107,27 @@ class TapTheButton extends Component {
           </TouchableWithoutFeedback>
         </ImageBackground>
         {/* MINIGAME CONTENT END */}
-
         {/* FIRST MODAL */}
-        {this.state.firstModal && (
-          <Popup
-            content={gameInstruction}
-            button={true}
-            link={false}
-            action={this.startLauncher}
-          />
-        )}
-
+        {/* {this.state.firstModal && ( */}
+        <Popup
+          content={gameInstruction}
+          button={true}
+          link={false}
+          modalState={this.state.firstModal}
+          action={this.startLauncher}
+        />
+        {/* )} */}
         {/* SECOND MODAL */}
-        {this.state.secondModal && (
-          <Popup
-            content={endText}
-            button={false}
-            link={true}
-            action="/Second"
-            />
-        )}
 
+        {/* {this.state.secondModal && ( */}
+        <Popup
+          content={endText}
+          button={false}
+          modalState={this.state.secondModal}
+          link={true}
+          action="/"
+        />
+        {/* )} */}
         {/* LAUNCHER */}
         {this.state.showLauncher && (
           <Launcher
@@ -202,7 +201,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'flex-end',
     margin: 15,
-  }
+  },
 });
 
 export default TapTheButton;
