@@ -5,15 +5,15 @@ import CountDown from 'react-native-countdown-component';
 // component CountryInfo
 const Counter = ({running, seconds, endGame}) => {
   return (
-    <View>
+    <View style={styles.containerTop}>
       <CountDown
         size={50}
         until={seconds}
         onFinish={() => endGame()}
         digitStyle={{
-          borderWidth: 0,
+          borderWidth: 0, 
         }}
-        digitTxtStyle={{color: 'black'}}
+        digitTxtStyle={{color: 'white'}}
         timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
         timeToShow={['S']}
         timeLabels={{m: null, s: null}}
@@ -26,10 +26,11 @@ const Counter = ({running, seconds, endGame}) => {
 const styles = StyleSheet.create({
   containerTop: {
     flex: 1,
-    alignItems: 'center',
+    alignSelf: 'center',
+    alignItems:'stretch',
     justifyContent: 'center',
-    ...StyleSheet.absoluteFill,
-    backgroundColor: 'rgba(230,230,230,0.5)',
+    // ...StyleSheet.absoluteFill,
+    backgroundColor: 'transparent',
   },
 });
 

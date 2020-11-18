@@ -1,23 +1,42 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React from 'react';
+import {Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
+import Modal from 'react-native-modalbox';
+import {Link} from 'react-router-native';
 
-import general from './components/content/general.json';
-
-const Info = () => {
+// component CountryInfo
+const Info = ({information, modalState, closeInfo}) => {
   return (
-    <View style={styles.container}>
-      <Text style={style.text}>{general.game1}"Hejjjj"</Text>
-    </View>
+    <Modal style={styles.modal} backdrop={false} isOpen={modalState}>
+      <TouchableOpacity onPress={() => closeInfo()} style={styles.closeInfoBtn}>
+        <Text style={styles.text}>x</Text>
+      </TouchableOpacity>
+      <Text style={styles.text}>{information}</Text>
+    </Modal>
   );
 };
 
 const styles = StyleSheet.create({
-  text: {
-    font: 30,
-    color: black,
+  modal: {
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 11,
+    width: '90%',
+    height: '90%',
+    borderRadius: 5,
   },
-  container: {
-    backgroundColor: grey,
+  text: {
+    fontSize: 30,
+    textAlign: 'center',
+  },
+  closeInfoBtn: {
+    backgroundColor: 'lightgrey',
+    borderRadius: 50,
+    width: 50,
+    height: 50,
+    right: -130,
+    top: -200,
+    fontSize: 30,
   },
 });
 

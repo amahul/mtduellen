@@ -4,13 +4,13 @@ import Modal from 'react-native-modalbox';
 import {Link} from 'react-router-native';
 
 // component CountryInfo
-const Popup = ({content, action, button, link}) => {
+const Popup = ({content, modalState, action, button, link}) => {
   return (
     <Modal
       style={styles.modal}
       backdrop={false}
       position={'center'}
-      isOpen={true}>
+      isOpen={modalState}>
       <Text style={styles.text}>{content}</Text>
 
       {button && <Button onPress={() => action()} title="Kör igång" />}
