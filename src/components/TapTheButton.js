@@ -63,7 +63,7 @@ class TapTheButton extends Component {
   };
 
   render() {
-    const gameTimer = 5;
+    const gameTimer = 50;
     const gameInstruction = 'Tryck på knappen så många gånger du kan';
     let endText = 'Du fick ' + this.state.count + ' poäng';
     return (
