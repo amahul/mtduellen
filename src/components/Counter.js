@@ -18,6 +18,12 @@ const Counter = ({running, seconds, endGame}) => {
         timeToShow={['S']}
         timeLabels={{m: null, s: null}}
         running={running}
+        style={{    
+          
+          // alignSelf: 'center',
+          // alignItems:'center',
+          // justifyContent: 'flex-end',
+          }}
       />
     </View>
   );
@@ -25,12 +31,14 @@ const Counter = ({running, seconds, endGame}) => {
 
 const styles = StyleSheet.create({
   containerTop: {
-    flex: 1,
-    alignSelf: 'center',
-    alignItems:'stretch',
+    // flex: 1,
+    // flexWrap: 'wrap',
+    flexDirection:'row',
+    // alignItems:'stretch',
     justifyContent: 'center',
     // ...StyleSheet.absoluteFill,
     backgroundColor: 'transparent',
+    width: '100%',
   },
 });
 
