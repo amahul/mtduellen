@@ -17,6 +17,8 @@ import background from '../bilder/homeBackground.png';
 import knapp from '../bilder/button2.png';
 import arrow from '../bilder/arrow.png';
 
+const store = require('./Storage');
+
 class TapTheButton extends Component {
   state = {
     count: 0,
@@ -48,6 +50,8 @@ class TapTheButton extends Component {
   };
 
   endGame = () => {
+    store.saveData(this.state.count);
+
     this.setState({
       secondModal: true,
       secondTimer: false,
@@ -63,7 +67,7 @@ class TapTheButton extends Component {
   };
 
   render() {
-    const gameTimer = 50;
+    const gameTimer = 5;
     const gameInstruction = 'Tryck på knappen så många gånger du kan';
     let endText = 'Du fick ' + this.state.count + ' poäng';
     return (

@@ -9,6 +9,7 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  Text,
 } from 'react-native';
 
 import icon from '../bilder/info_dark.png';
@@ -45,6 +46,8 @@ class Home extends Component {
   };
 
   render() {
+    let activeScore = store.readData();
+
     return (
       <ImageBackground style={styles.imageBackground}>
         <View style={styles.infoBtnHolder}>
@@ -71,10 +74,17 @@ class Home extends Component {
             </Link> */}
             <Image
               source={highscoresExpanded}
-              style={{resizeMode:'contain', width: 300, height: 200, bottom: 40, margin: 5}}
+              style={{
+                resizeMode: 'contain',
+                width: 300,
+                height: 200,
+                bottom: 40,
+                margin: 5,
+              }}
             />
             {/* <Image source={highscoresExpanded} style={{width: 300, height: 250, bottom: 40, margin:5}}/> */}
           </View>
+
           <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
             {/* onPress={() => this.props.navigation.navigate("/Tap")} */}
             <Link to="/Tap">
