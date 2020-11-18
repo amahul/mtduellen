@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, TouchableWithoutFeedback, ImageBackground} from 'react-native';
+import {View, Text, StyleSheet, TouchableWithoutFeedback, ImageBackground, Image} from 'react-native';
 
 import {Link} from 'react-router-native';
 
@@ -7,12 +7,13 @@ import Popup from './Popup';
 import Launcher from './Launcher';
 import Counter from './Counter';
 import background from '../bilder/homeBackground.png';
+import knapp from '../bilder/button2.png';
 import arrow from '../bilder/arrow.png';
 
 class TapTheButton extends Component {
   state = {
     count: 0,
-    size: 30,
+    size: 150,
     secondTimer: false,
     firstModal: true,
     secondModal: false,
@@ -25,7 +26,7 @@ class TapTheButton extends Component {
     if (this.state.secondTimer) {
       this.setState({
         count: this.state.count + 1,
-        size: this.state.size + 2,
+        size: this.state.size + 5,
       });
     }
   };
@@ -53,7 +54,7 @@ class TapTheButton extends Component {
   };
 
   render() {
-    const gameTimer = 5;
+    const gameTimer = 50;
     const gameInstruction = 'Tryck på knappen så många gånger du kan';
     let endText = 'Du fick ' + this.state.count + ' poäng';
     return (
@@ -64,25 +65,34 @@ class TapTheButton extends Component {
             seconds={gameTimer}
             running={this.state.secondTimer}
             endGame={this.endGame}
+            style={styles.counter}
           />
         )}
 
         {/* MINIGAME CONTENT */}
-        <ImageBackground source={background} style={styles.image}>
+        <ImageBackground  style={styles.image}>
+
+        <View style={{right: 160}}>
+          <Link to="/">
+            <Image source={arrow} style={styles.icon}/>
+          </Link>
+        </View>
+
         <TouchableWithoutFeedback onPress={this.onPress}>
-          <View style={styles.button} padding={this.state.size}>
-            <Text style={styles.text}>{this.state.count}</Text>
+          <View  style={{ width:this.state.size,
+                          height:this.state.size}}>
+            <ImageBackground source={knapp} style={styles.button}>
+            <Text style={styles.text, {height: this.state.size}}>{this.state.count}</Text>
+            </ImageBackground>
           </View>
         </TouchableWithoutFeedback>
 
         <Link to="/" underlayColor="#f0f4f7">
           <Text>Hem</Text>
         </Link>
-        </ImageBackground>
 
-        <View source={arrow}>
-          <Link to="/Tap"></Link>
-        </View>
+        
+        </ImageBackground>
         {/* MINIGAME CONTENT END */}
 
         {/* FIRST MODAL */}
@@ -102,7 +112,7 @@ class TapTheButton extends Component {
             button={false}
             link={true}
             action="/Second"
-          />
+            />
         )}
 
         {/* LAUNCHER */}
@@ -123,12 +133,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    backgroundColor: 'whitesmoke',
+    backgroundColor: '#13283C',
+  },
+  counter: {
+    color: 'white'
   },
   button: {
     alignItems: 'center',
-    backgroundColor: 'orange',
-    borderRadius: 20,
+    justifyContent: 'center',
+    resizeMode: 'contain',
   },
   modal: {
     position: 'relative',
@@ -144,13 +157,13 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.36,
     shadowRadius: 6.68,
-
     elevation: 11,
   },
 
   text: {
     fontSize: 40,
     textAlign: 'center',
+    color: 'white'
   },
   image: {
     paddingTop: 20,
@@ -158,8 +171,12 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     alignItems: 'center',
     alignSelf: 'stretch',
-    backgroundColor: 'white',
+    backgroundColor: '#13283C',
   },
+  icon: {
+    width:50,
+    height: 50,
+  }
 });
 
 export default TapTheButton;
