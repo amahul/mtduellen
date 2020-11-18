@@ -14,6 +14,7 @@ class TapTheButton extends Component {
   state = {
     count: 0,
     size: 150,
+    fontSize: 40,
     secondTimer: false,
     firstModal: true,
     secondModal: false,
@@ -27,6 +28,7 @@ class TapTheButton extends Component {
       this.setState({
         count: this.state.count + 1,
         size: this.state.size + 5,
+        fontSize: this.state.fontSize +1,
       });
     }
   };
@@ -59,20 +61,21 @@ class TapTheButton extends Component {
     let endText = 'Du fick ' + this.state.count + ' poäng';
     return (
       <View style={styles.container}>
-        {/* Back arrow */}
         <View style={styles.counterContainer}>
           <Link to="/">
             <Image source={arrow} style={styles.icon}/>
           </Link>
 
-          {/* GAME COUNTER */}
-        {this.state.secondTimer && (
-          <Counter
-            seconds={gameTimer}
-            running={this.state.secondTimer}
-            endGame={this.endGame}
-          />
-        )}
+            {/* GAME COUNTER */}
+          <View style={styles.counter, {justifyContent:'center'}}>
+            {this.state.secondTimer && (
+              <Counter
+                seconds={gameTimer}
+                running={this.state.secondTimer}
+                endGame={this.endGame}
+              />
+            )}
+          </View>
         </View>
 
         
@@ -84,7 +87,7 @@ class TapTheButton extends Component {
           <View  style={{ width:this.state.size,
                           height:this.state.size}}>
             <ImageBackground source={knapp} style={styles.button, styles.container}>
-            <Text style={styles.text, {height: this.state.size}}>{this.state.count}</Text>
+            <Text style={styles.text, {fontSize: this.state.fontSize, color: 'white', alignSelf:'center'}}>{this.state.count}</Text>
             </ImageBackground>
           </View>
         </TouchableWithoutFeedback>
@@ -139,6 +142,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     color: 'white',
   },
+  counter: {
+    alignSelf: 'center',
+    flex:4,
+    flexDirection:'row'
+  },
   button: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -164,9 +172,8 @@ const styles = StyleSheet.create({
 
   text: {
     fontSize: 40,
-    textAlign: 'center',
     color: 'white',
-    justifyContent: 'center',
+    alignSelf: 'center'
   },
   image: {
     paddingTop: 20,
