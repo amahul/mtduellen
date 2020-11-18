@@ -10,23 +10,18 @@ import {
   Image,
   StyleSheet,
   Button,
-<<<<<<< HEAD
   TouchableOpacity,
+  Alert,
+  Pressable,
+  Action
 } from 'react-native';
 
-import {Link} from 'react-router-native';
 
-import logo from '../bilder/logo_3.png';
-import background from '../bilder/backgroundCandy.png';
+
 import Modal from 'react-native-modalbox';
 import Info from './Info';
 import {greaterThan} from 'react-native-reanimated';
-=======
-  Alert,
-  Pressable,
-  TouchableOpacity,
-  Action
-} from 'react-native';
+  
 import {Icon} from 'react-native-elements';
 import icon from '../bilder/info_dark.png';
 
@@ -40,7 +35,6 @@ import highscoresExpanded from '../bilder/highscore_expanded.png';
 import play from '../bilder/play_dark.png';
 import background from '../bilder/homeBackground.png';
 import Popup from './Popup';
->>>>>>> 419319c405c82d227be786494fb6695031c24f6f
 const information = 'Det är endast MT-studenter som kan delta i tävlingen';
 
 class Home extends Component {
