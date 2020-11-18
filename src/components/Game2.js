@@ -150,7 +150,7 @@ class Game2 extends Component {
 
             {/* SECOND MODAL */}
             {this.state.secondModal && (
-              <Popup content={endText} button={false} link={true} action="/Candy" />
+              <Popup content={endText} button={false} link={true} action="/" />
             )}
 
             {/* LAUNCHER */}
