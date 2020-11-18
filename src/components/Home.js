@@ -19,7 +19,6 @@ import {
 
 
 import Modal from 'react-native-modalbox';
-import Info from './Info';
 import {greaterThan} from 'react-native-reanimated';
   
 import {Icon} from 'react-native-elements';
@@ -35,6 +34,7 @@ import highscoresExpanded from '../bilder/highscore_expanded.png';
 import play from '../bilder/play_dark.png';
 import background from '../bilder/homeBackground.png';
 import Popup from './Popup';
+import Info from './Info';
 const information = 'Det är endast MT-studenter som kan delta i tävlingen';
 
 class Home extends Component {
@@ -60,33 +60,25 @@ class Home extends Component {
 
   render() {
     return (
-      <ImageBackground  style={styles.imageBackground}>
-        {/* <Button
-          onPress={() => Alert.alert('Simple Button pressed')}
-          style={styles.infoBtn}
-          title="Info"></Button>
-        <Icon
-          reverse
-          name="ios-american-football"
-          type="ionicon"
-          color="#517fa4"
-        > 
-        </Icon> */}
+      <ImageBackground style={styles.imageBackground}>
         <View>
           <TouchableOpacity
-            style={{opacity:0.9}}
+            style={{opacity: 0.9}}
             activeOpacity={0.5}
-            onPress={() => Alert.alert(information)}
+            onPress={this.openInfo}
             //style={styles.infoBtn}
             title="Info">
-              <Image source={icon} style={{width: 60, height: 60, bottom: 0, margin:10, left: 340}}/>
+            <Image
+              source={icon}
+              style={{width: 60, height: 60, bottom: 0, margin: 10, left: 340}}
+            />
           </TouchableOpacity>
         </View>
 
         <View style={styles.container}>
-          <TouchableOpacity onPress={this.openInfo} style={styles.infoBtn}>
+          {/* <TouchableOpacity onPress={this.openInfo} style={styles.infoBtn}>
             <Text style={styles.text}>i</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <View style={styles.logoContainer}>
             <Image source={logo2} style={styles.logo} />
           </View>
@@ -95,23 +87,24 @@ class Home extends Component {
           </View>
 
           <View>
-            <Link to="/Tap" style={styles.button}>
+            {/* <Link to="/Tap" style={styles.button}>
               <Text style={styles.text}>Spela</Text>
-            </Link>
-            <Image source={highscores} style={{width: 300, height: 70, bottom: 40, margin:5}}/>
+            </Link> */}
+            <Image
+              source={highscores}
+              style={{width: 300, height: 70, bottom: 40, margin: 5}}
+            />
             {/* <Image source={highscoresExpanded} style={{width: 300, height: 250, bottom: 40, margin:5}}/> */}
           </View>
-          <TouchableOpacity 
-            style={{bottom:40}} 
-            activeOpacity={0.5}
-            >
-              {/* onPress={() => this.props.navigation.navigate("/Tap")} */}
+          <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
+            {/* onPress={() => this.props.navigation.navigate("/Tap")} */}
             <Link to="/Tap">
-              <Image source={play} style={{width: 300, height: 70, bottom: 0, margin: 5}} />
+              <Image
+                source={play}
+                style={{width: 300, height: 70, bottom: 0, margin: 5}}
+              />
             </Link>
           </TouchableOpacity>
-          
-       
 
           {/* <View style={{position:'relative', bottom: 100}} > 
           <LinearGradient colors={['#F49D6C', '#EC6610', '#913305']} locations={[0.0,0.5,1]} style={styles.button}>
@@ -136,9 +129,7 @@ class Home extends Component {
   }
 }
 
-
 const styles = StyleSheet.create({
-
   container: {
     flex: 3,
     alignItems: 'center',
@@ -159,7 +150,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   logoContainer: {
-    top:40,
+    top: 40,
     height: 100,
     flex: 1,
     // justifyContent: 'flex-start',
@@ -196,16 +187,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderRadius: 30,
     fontSize: 40,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: '#13283C',
     lineHeight: 50,
-    fontFamily: "serif",
+    fontFamily: 'serif',
     //fontFamily: 'Helvetica Bold',
   },
 });
 
 export default Home;
-
 
 // -----------------  Färgkoder -------------------- //
 // Orange:  #EC6610

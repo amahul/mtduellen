@@ -4,8 +4,6 @@ import {NativeRouter, Switch, Route} from 'react-router-native';
 
 import Home from './src/components/Home';
 import TapTheButton from './src/components/TapTheButton';
- import Game2 from './src/components/Flappy';
-//import Info from './src/components/Info';
 
 class App extends Component {
   render() {

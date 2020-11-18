@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, TouchableWithoutFeedback, ImageBackground, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  ImageBackground,
+  Image,
+} from 'react-native';
 
 import {Link} from 'react-router-native';
 
@@ -18,8 +25,8 @@ class TapTheButton extends Component {
     secondTimer: false,
     firstModal: true,
     secondModal: false,
-    firstTimer: false,
-    showLauncher: false,
+    firstTimer: true,
+    showLauncher: true,
   };
 
   onPress = () => {
@@ -63,11 +70,11 @@ class TapTheButton extends Component {
       <View style={styles.container}>
         <View style={styles.counterContainer}>
           <Link to="/">
-            <Image source={arrow} style={styles.icon}/>
+            <Image source={arrow} style={styles.icon} />
           </Link>
 
-            {/* GAME COUNTER */}
-          <View style={styles.counter, {justifyContent:'center'}}>
+          {/* GAME COUNTER */}
+          <View style={(styles.counter, {justifyContent: 'center'})}>
             {this.state.secondTimer && (
               <Counter
                 seconds={gameTimer}
@@ -78,23 +85,29 @@ class TapTheButton extends Component {
           </View>
         </View>
 
-        
-
         {/* MINIGAME CONTENT */}
-        <ImageBackground  style={styles.image}>
-
-        <TouchableWithoutFeedback onPress={this.onPress}>
-          <View  style={{ width:this.state.size,
-                          height:this.state.size}}>
-            <ImageBackground source={knapp} style={styles.button, styles.container}>
-            <Text style={styles.text, {fontSize: this.state.fontSize, color: 'white', alignSelf:'center'}}>{this.state.count}</Text>
-            </ImageBackground>
-          </View>
-        </TouchableWithoutFeedback>
-    
+        <ImageBackground style={styles.image}>
+          <TouchableWithoutFeedback onPress={this.onPress}>
+            <View style={{width: this.state.size, height: this.state.size}}>
+              <ImageBackground
+                source={knapp}
+                style={(styles.button, styles.container)}>
+                <Text
+                  style={
+                    (styles.text,
+                    {
+                      fontSize: this.state.fontSize,
+                      color: 'white',
+                      alignSelf: 'center',
+                    })
+                  }>
+                  {this.state.count}
+                </Text>
+              </ImageBackground>
+            </View>
+          </TouchableWithoutFeedback>
         </ImageBackground>
         {/* MINIGAME CONTENT END */}
-
 
         {/* FIRST MODAL */}
         {this.state.firstModal && (
@@ -144,8 +157,8 @@ const styles = StyleSheet.create({
   },
   counter: {
     alignSelf: 'center',
-    flex:4,
-    flexDirection:'row'
+    flex: 4,
+    flexDirection: 'row',
   },
   button: {
     alignItems: 'center',
@@ -173,19 +186,19 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 40,
     color: 'white',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   image: {
     paddingTop: 20,
     flex: 4,
     resizeMode: 'cover',
-    justifyContent:'center',
+    justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'stretch',
     backgroundColor: '#13283C',
   },
   icon: {
-    width:50,
+    width: 50,
     height: 50,
     justifyContent: 'flex-end',
     margin: 15,

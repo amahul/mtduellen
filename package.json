@@ -24,7 +24,7 @@
     "react-native-countdown-component": "^2.7.1",
     "react-native-elements": "^3.0.0-alpha.1",
     "react-native-game-engine": "^1.2.0",
-    "react-native-gesture-handler": "^1.8.0",
+    "react-native-gesture-handler": "~1.7.0",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-modalbox": "^2.0.2",
     "react-native-reanimated": "^1.13.1",
@@ -49,7 +49,7 @@
   "jest": {
     "preset": "react-native"
   },
-  "main": "index.js",
+  "main": "node_modules/expo/AppEntry.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/amahul/mtduellen.git"
