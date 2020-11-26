@@ -17,6 +17,7 @@ import background from '../bilder/homeBackground.png';
 import knapp from '../bilder/button2.png';
 import arrow from '../bilder/arrow.png';
 import Modal from 'react-native-modalbox';
+import play from '../bilder/play_dark.png';
 
 const store = require('./Storage');
 
@@ -141,11 +142,20 @@ class TapTheButton extends Component {
           backdrop={false}
           position={'center'}
           isOpen={this.state.secondModal}>
-          <Text>{endText}</Text>
+          <Text style={{
+            fontSize:30, fontWeight:'bold', font: 'Barlow', top: 35,
+          }}>{endText}</Text>
 
-          <Link to="/" underlayColor="#f0f4f7">
+          {/* <Link to="/" underlayColor="#f0f4f7">
             <Text>Nästa spel</Text>
-          </Link>
+          </Link> */}
+
+            <Link to="/">
+              <Image
+                source={play}
+                style={{width: 250, height: 70, bottom: 0, margin: 5, top: 75,}}
+              />
+            </Link>
         </Modal>
 
         {/* )} */}
@@ -192,7 +202,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     position: 'relative',
-    backgroundColor: 'green',
+    //backgroundColor: 'green',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,

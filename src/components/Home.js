@@ -20,6 +20,7 @@ import logo2 from '../bilder/logo_alt2.png';
 import highscores from '../bilder/highscore_dark.png';
 import highscoresExpanded from '../bilder/highscores_expanded.png';
 import play from '../bilder/play_dark.png';
+const store = require('./Storage');
 
 import Info from './Info';
 const information =
