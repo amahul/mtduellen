@@ -71,7 +71,13 @@ class Home extends Component {
             </Link> */}
             <Image
               source={highscoresExpanded}
-              style={{resizeMode:'contain', width: 300, height: 200, bottom: 40, margin: 5}}
+              style={{
+                resizeMode: 'contain',
+                width: 300,
+                height: 200,
+                bottom: 40,
+                margin: 5,
+              }}
             />
             {/* <Image source={highscoresExpanded} style={{width: 300, height: 250, bottom: 40, margin:5}}/> */}
           </View>
@@ -150,7 +156,6 @@ const styles = StyleSheet.create({
     color: '#13283C',
     lineHeight: 50,
     fontFamily: 'serif',
-    //fontFamily: 'Helvetica Bold',
   },
 });
 

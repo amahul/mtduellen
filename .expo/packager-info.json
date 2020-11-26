@@ -1,9 +1,9 @@
 {
-  "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://tc-4ri.anonymous.mtduellen.exp.direct",
+  "packagerNgrokUrl": "https://packager.tc-4ri.anonymous.mtduellen.exp.direct",
+  "ngrokPid": 12297,
   "devToolsPort": 19002,
-  "packagerPort": null,
-  "packagerPid": null
+  "packagerPort": 19001,
+  "packagerPid": 3118
 }
