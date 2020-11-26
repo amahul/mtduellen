@@ -177,8 +177,12 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     color: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 20,
+  },
+  counter: {
+    alignSelf: 'center',
+    flex: 4,
+    flexDirection: 'row',
   },
   button: {
     alignItems: 'center',
