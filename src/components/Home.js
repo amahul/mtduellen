@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     opacity: 0.9,
   },
   logoContainer: {
-    top: 80,
+    top: 20,
     height: 100,
     flex: 1,
     // justifyContent: 'flex-start',

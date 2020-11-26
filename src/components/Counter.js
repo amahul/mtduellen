@@ -7,11 +7,11 @@ const Counter = ({running, seconds, endGame}) => {
   return (
     <View style={styles.containerTop}>
       <CountDown
-        size={50}
+        size={60}
         until={seconds}
         onFinish={() => endGame()}
         digitStyle={{
-          borderWidth: 0, 
+          borderWidth: 0,
         }}
         digitTxtStyle={{color: 'white'}}
         timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   containerTop: {
     flex: 1,
     alignSelf: 'center',
-    alignItems:'stretch',
+    alignItems: 'stretch',
     justifyContent: 'center',
     // ...StyleSheet.absoluteFill,
     backgroundColor: 'transparent',

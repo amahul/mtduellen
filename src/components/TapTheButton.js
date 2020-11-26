@@ -16,6 +16,7 @@ import Counter from './Counter';
 import background from '../bilder/homeBackground.png';
 import knapp from '../bilder/button2.png';
 import arrow from '../bilder/arrow.png';
+import Modal from 'react-native-modalbox';
 
 const store = require('./Storage');
 
@@ -70,28 +71,31 @@ class TapTheButton extends Component {
     const gameTimer = 5;
     const gameInstruction = 'Tryck på knappen så många gånger du kan';
     let endText = 'Du fick ' + this.state.count + ' poäng';
+
     return (
       <View style={styles.container}>
+        <Link to="/">
+          <Image source={arrow} style={styles.icon} />
+        </Link>
         <View style={styles.counterContainer}>
-          <Link to="/">
-            <Image source={arrow} style={styles.icon} />
-          </Link>
-
           {/* GAME COUNTER */}
-          <View style={(styles.counter, {justifyContent: 'center'})}>
-            {this.state.secondTimer && (
-              <Counter
-                seconds={gameTimer}
-                running={this.state.secondTimer}
-                endGame={this.endGame}
-              />
-            )}
-          </View>
+          {/* {this.state.secondTimer && ( */}
+          <Counter
+            seconds={gameTimer}
+            running={this.state.secondTimer}
+            endGame={this.endGame}
+          />
+          {/* )} */}
         </View>
         {/* MINIGAME CONTENT */}
         <ImageBackground style={styles.image}>
           <TouchableWithoutFeedback onPress={this.onPress}>
-            <View style={{width: this.state.size, height: this.state.size}}>
+            <View
+              style={{
+                width: this.state.size,
+                height: this.state.size,
+                top: -110,
+              }}>
               <ImageBackground
                 source={knapp}
                 style={(styles.button, styles.container)}>
@@ -124,21 +128,34 @@ class TapTheButton extends Component {
         {/* SECOND MODAL */}
 
         {/* {this.state.secondModal && ( */}
-        <Popup
+        {/* <Popup
           content={endText}
           button={false}
           modalState={this.state.secondModal}
           link={true}
           action="/"
-        />
+        /> */}
+
+        <Modal
+          style={styles.modal}
+          backdrop={false}
+          position={'center'}
+          isOpen={this.state.secondModal}>
+          <Text>{endText}</Text>
+
+          <Link to="/" underlayColor="#f0f4f7">
+            <Text>Nästa spel</Text>
+          </Link>
+        </Modal>
+
         {/* )} */}
         {/* LAUNCHER */}
-        {this.state.showLauncher && (
+        {this.state.showLauncher ? (
           <Launcher
             running={this.state.firstTimer}
             startGame={this.startGame}
           />
-        )}
+        ) : null}
       </View>
     );
   }
@@ -154,14 +171,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#13283C',
   },
   counterContainer: {
+    zIndex: 30, // works on ios
+    elevation: 30, // works on android
     flex: 1,
+    width: '100%',
     flexDirection: 'row',
     color: 'white',
-  },
-  counter: {
-    alignSelf: 'center',
-    flex: 4,
-    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   button: {
     alignItems: 'center',
@@ -171,6 +188,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     position: 'relative',
+    backgroundColor: 'green',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
@@ -183,6 +201,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.36,
     shadowRadius: 6.68,
+
     elevation: 11,
   },
 
@@ -205,6 +224,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'flex-end',
     margin: 15,
+    top: 20,
   },
 });
 
