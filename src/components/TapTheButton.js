@@ -43,6 +43,7 @@ class TapTheButton extends Component {
   };
 
   startGame = () => {
+    console.log('fooo')
     this.setState({
       secondTimer: true,
       showLauncher: false,
@@ -62,7 +63,7 @@ class TapTheButton extends Component {
     this.setState({
       firstModal: false,
       firstTimer: true,
-      showLauncher: true,
+      //showLauncher: true,
     });
   };
 
@@ -70,6 +71,7 @@ class TapTheButton extends Component {
     const gameTimer = 5;
     const gameInstruction = 'Tryck på knappen så många gånger du kan';
     let endText = 'Du fick ' + this.state.count + ' poäng';
+
     return (
       <View style={styles.container}>
         <View style={styles.counterContainer}>
@@ -133,6 +135,7 @@ class TapTheButton extends Component {
         />
         {/* )} */}
         {/* LAUNCHER */}
+        {/* showLauncher problem */}
         {this.state.showLauncher && (
           <Launcher
             running={this.state.firstTimer}

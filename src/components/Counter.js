@@ -11,15 +11,15 @@ const Counter = ({running, seconds, endGame}) => {
         until={seconds}
         onFinish={() => endGame()}
         digitStyle={{
-          borderWidth: 0, 
+          borderWidth: 0,
         }}
         digitTxtStyle={{color: 'white'}}
         timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
         timeToShow={['S']}
         timeLabels={{m: null, s: null}}
         running={running}
-        style={{    
-          
+        style={{
+
           // alignSelf: 'center',
           // alignItems:'center',
           // justifyContent: 'flex-end',

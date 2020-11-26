@@ -1,14 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// ----------------------------------
-// Becca testar AsyncStorage
-// ----------------------------------
-
 const saveData = async (value) => {
   try {
     const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem('@storage_Key', jsonValue);
-    alert(value);
+    await AsyncStorage.setItem('userData', jsonValue);
+    alert('Värdet har sparats: ' + value);
   } catch (e) {
     alert(e);
   }
@@ -16,7 +12,7 @@ const saveData = async (value) => {
 
 const readData = async () => {
   try {
-    const jsonValue = await AsyncStorage.getItem('@storage_Key');
+    const jsonValue = await AsyncStorage.getItem('userData');
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
     alert(e);
