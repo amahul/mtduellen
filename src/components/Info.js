@@ -26,16 +26,17 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   text: {
-    fontSize: 30,
+    fontSize: 24,
     textAlign: 'center',
+    padding: 10
   },
   closeInfoBtn: {
     backgroundColor: 'lightgrey',
     borderRadius: 50,
-    width: 50,
-    height: 50,
-    right: -130,
-    top: -200,
+    width: 58,
+    height: 58,
+    right: -140,
+    top: -235,
     fontSize: 30,
   },
 });
