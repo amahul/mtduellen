@@ -1,15 +1,20 @@
 {
+<<<<<<< HEAD
   "name": "mtduellen",
   "version": "0.0.1",
   "private": true,
+=======
+  "main": "node_modules/expo/AppEntry.js",
+>>>>>>> b783a9407ab04fe68b5ea82eb843d3d3b7725095
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint ."
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@react-native-community/async-storage": "~1.12.0",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.7.6",
@@ -33,19 +38,33 @@
     "react-native-sound-player": "^0.10.5",
     "react-native-vector-icons": "^7.1.0",
     "react-navigation": "^4.4.2",
+=======
+    "@react-native-async-storage/async-storage": "^1.13.2",
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/native": "^5.8.8",
+    "@react-navigation/stack": "^5.12.5",
+    "AsyncStorage": "^0.1.5",
+    "expo": "~39.0.2",
+    "expo-status-bar": "~1.0.2",
+    "react": "^16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
+    "react-native-countdown-component": "^2.7.1",
+    "react-native-gesture-handler": "^1.7.0",
+    "react-native-modalbox": "^2.0.2",
+    "react-native-reanimated": "^1.13.1",
+    "react-native-safe-area-context": "^3.1.8",
+    "react-native-screens": "^2.13.0",
+    "react-native-sound-player": "^0.10.5",
+    "react-native-web": "~0.13.12",
+    "react-navigation": "^4.4.3",
+>>>>>>> b783a9407ab04fe68b5ea82eb843d3d3b7725095
     "react-router-native": "^5.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/runtime": "^7.11.2",
-    "@react-native-community/eslint-config": "^2.0.0",
-    "babel-jest": "^26.5.2",
-    "eslint": "^7.11.0",
-    "jest": "^26.5.3",
-    "jetifier": "^1.6.6",
-    "metro-react-native-babel-preset": "^0.63.0",
-    "react-test-renderer": "16.13.1"
+    "@babel/core": "~7.9.0"
   },
+<<<<<<< HEAD
   "jest": {
     "preset": "react-native"
   },
@@ -61,4 +80,7 @@
   },
   "homepage": "https://github.com/amahul/mtduellen#readme",
   "description": ""
+=======
+  "private": true
+>>>>>>> b783a9407ab04fe68b5ea82eb843d3d3b7725095
 }

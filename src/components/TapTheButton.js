@@ -16,6 +16,12 @@ import Counter from './Counter';
 import background from '../bilder/homeBackground.png';
 import knapp from '../bilder/button2.png';
 import arrow from '../bilder/arrow.png';
+<<<<<<< HEAD
+=======
+import Modal from 'react-native-modalbox';
+
+const store = require('./Storage');
+>>>>>>> b783a9407ab04fe68b5ea82eb843d3d3b7725095
 
 class TapTheButton extends Component {
   state = {
@@ -48,6 +54,8 @@ class TapTheButton extends Component {
   };
 
   endGame = () => {
+    store.saveData(this.state.count);
+
     this.setState({
       secondModal: true,
       secondTimer: false,
@@ -66,8 +74,10 @@ class TapTheButton extends Component {
     const gameTimer = 50;
     const gameInstruction = 'Tryck på knappen så många gånger du kan';
     let endText = 'Du fick ' + this.state.count + ' poäng';
+
     return (
       <View style={styles.container}>
+<<<<<<< HEAD
         <View style={styles.counterContainer}>
           <Link to="/">
             <Image source={arrow} style={styles.icon} />
@@ -83,11 +93,34 @@ class TapTheButton extends Component {
               />
             )}
           </View>
+=======
+        <Link to="/">
+          <Image source={arrow} style={styles.icon} />
+        </Link>
+        <View style={styles.counterContainer}>
+          {/* GAME COUNTER */}
+          {/* {this.state.secondTimer && ( */}
+          <Counter
+            seconds={gameTimer}
+            running={this.state.secondTimer}
+            endGame={this.endGame}
+          />
+          {/* )} */}
+>>>>>>> b783a9407ab04fe68b5ea82eb843d3d3b7725095
         </View>
         {/* MINIGAME CONTENT */}
         <ImageBackground style={styles.image}>
           <TouchableWithoutFeedback onPress={this.onPress}>
+<<<<<<< HEAD
             <View style={{width: this.state.size, height: this.state.size}}>
+=======
+            <View
+              style={{
+                width: this.state.size,
+                height: this.state.size,
+                top: -110,
+              }}>
+>>>>>>> b783a9407ab04fe68b5ea82eb843d3d3b7725095
               <ImageBackground
                 source={knapp}
                 style={(styles.button, styles.container)}>
@@ -120,21 +153,42 @@ class TapTheButton extends Component {
         {/* SECOND MODAL */}
 
         {/* {this.state.secondModal && ( */}
+<<<<<<< HEAD
         <Popup
+=======
+        {/* <Popup
+>>>>>>> b783a9407ab04fe68b5ea82eb843d3d3b7725095
           content={endText}
           button={false}
           modalState={this.state.secondModal}
           link={true}
           action="/"
+<<<<<<< HEAD
         />
+=======
+        /> */}
+
+        <Modal
+          style={styles.modal}
+          backdrop={false}
+          position={'center'}
+          isOpen={this.state.secondModal}>
+          <Text>{endText}</Text>
+
+          <Link to="/" underlayColor="#f0f4f7">
+            <Text>Nästa spel</Text>
+          </Link>
+        </Modal>
+
+>>>>>>> b783a9407ab04fe68b5ea82eb843d3d3b7725095
         {/* )} */}
         {/* LAUNCHER */}
-        {this.state.showLauncher && (
+        {this.state.showLauncher ? (
           <Launcher
             running={this.state.firstTimer}
             startGame={this.startGame}
           />
-        )}
+        ) : null}
       </View>
     );
   }
@@ -146,6 +200,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'flex-start',
+<<<<<<< HEAD
     width: '100%',
     backgroundColor: '#13283C',
   },
@@ -153,6 +208,19 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     color: 'white',
+=======
+    width: '100%',
+    backgroundColor: '#13283C',
+  },
+  counterContainer: {
+    zIndex: 30, // works on ios
+    elevation: 30, // works on android
+    flex: 1,
+    width: '100%',
+    flexDirection: 'row',
+    color: 'white',
+    marginTop: 20,
+>>>>>>> b783a9407ab04fe68b5ea82eb843d3d3b7725095
   },
   counter: {
     alignSelf: 'center',
@@ -167,6 +235,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     position: 'relative',
+    backgroundColor: 'green',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
@@ -201,6 +270,10 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'flex-end',
     margin: 15,
+<<<<<<< HEAD
+=======
+    top: 20,
+>>>>>>> b783a9407ab04fe68b5ea82eb843d3d3b7725095
   },
 });
 

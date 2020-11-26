@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
-import './Storage.js';
-const store = require('./Storage'); // Ska dessa vara kvar?
+// import './Storage.js';
+// const store = require('./Storage'); // Ska dessa vara kvar?
 
 import {
   ImageBackground,
@@ -9,6 +9,7 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  Text,
 } from 'react-native';
 
 import icon from '../bilder/info_dark.png';
@@ -21,7 +22,8 @@ import highscoresExpanded from '../bilder/highscores_expanded.png';
 import play from '../bilder/play_dark.png';
 
 import Info from './Info';
-const information = 'Det är endast MT-studenter som kan delta i tävlingen';
+const information =
+  'Välkommen till MT-Duellen! Tävla i appen och vinn fina priser på mässdagen. Det är endast MT-studenter som kan delta i tävlingen';
 
 class Home extends Component {
   state = {
@@ -45,6 +47,8 @@ class Home extends Component {
   };
 
   render() {
+    let activeScore = store.readData();
+
     return (
       <ImageBackground style={styles.imageBackground}>
         <View style={styles.infoBtnHolder}>
@@ -63,26 +67,21 @@ class Home extends Component {
 
         <View style={styles.container}>
           <View style={styles.logoContainer}>
-            <Image source={logo2} style={styles.logo} />
+            <Image source={logo2} style={styles.imgFlex} />
           </View>
-          <View>
-            {/* <Link to="/Tap" style={styles.button}>
-              <Text style={styles.text}>Spela</Text>
-            </Link> */}
+          <View style={styles.imgFlex2}>
             <Image
               source={highscoresExpanded}
               style={{
-                resizeMode: 'contain',
-                width: 300,
-                height: 200,
-                bottom: 40,
+                resizeMode: 'stretch',
+                width: 400,
+                height: 400,
                 margin: 5,
               }}
             />
-            {/* <Image source={highscoresExpanded} style={{width: 300, height: 250, bottom: 40, margin:5}}/> */}
           </View>
+
           <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
-            {/* onPress={() => this.props.navigation.navigate("/Tap")} */}
             <Link to="/Tap">
               <Image
                 source={play}
@@ -123,9 +122,10 @@ const styles = StyleSheet.create({
   infoBtn: {
     padding: 0,
     opacity: 0.9,
+    zIndex: 1,
   },
   logoContainer: {
-    top: 80,
+    top: 20,
     height: 100,
     flex: 1,
     // justifyContent: 'flex-start',
@@ -135,6 +135,22 @@ const styles = StyleSheet.create({
     width: '50%',
     height: '50%',
     resizeMode: 'contain',
+  },
+  imgFlex: {
+    resizeMode: 'contain',
+    width: 300,
+    margin: 10,
+    // backgroundColor: 'green',
+  },
+  imgFlex2: {
+    resizeMode: 'contain',
+    flex: 3,
+    flexDirection: 'column',
+    width: 300,
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    // backgroundColor: 'blue',
   },
   logo: {
     width: 255,
@@ -156,6 +172,7 @@ const styles = StyleSheet.create({
     color: '#13283C',
     lineHeight: 50,
     fontFamily: 'serif',
+    //fontFamily: 'Helvetica Bold',
   },
 });
 

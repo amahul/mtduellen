@@ -7,7 +7,7 @@ const Launcher = ({running, startGame}) => {
   return (
     <View style={styles.containerTop}>
       <CountDown
-        size={50}
+        size={60}
         until={3}
         onFinish={() => {
           startGame();
