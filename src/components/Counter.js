@@ -7,7 +7,7 @@ const Counter = ({running, seconds, endGame}) => {
   return (
     <View style={styles.containerTop}>
       <CountDown
-        size={50}
+        size={60}
         until={seconds}
         onFinish={() => endGame()}
         digitStyle={{
@@ -18,12 +18,22 @@ const Counter = ({running, seconds, endGame}) => {
         timeToShow={['S']}
         timeLabels={{m: null, s: null}}
         running={running}
+<<<<<<< HEAD
         style={{
 
           // alignSelf: 'center',
           // alignItems:'center',
           // justifyContent: 'flex-end',
           }}
+=======
+        style={
+          {
+            // alignSelf: 'center',
+            // alignItems:'center',
+            // justifyContent: 'flex-end',
+          }
+        }
+>>>>>>> 3654841e7f705a18aecbfee4d2a1c6af4dc65cb9
       />
     </View>
   );
@@ -33,7 +43,7 @@ const styles = StyleSheet.create({
   containerTop: {
     // flex: 1,
     // flexWrap: 'wrap',
-    flexDirection:'row',
+    flexDirection: 'row',
     // alignItems:'stretch',
     justifyContent: 'center',
     // ...StyleSheet.absoluteFill,

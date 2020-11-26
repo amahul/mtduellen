@@ -9,7 +9,7 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
-  Text
+  Text,
 } from 'react-native';
 
 import icon from '../bilder/info_dark.png';
@@ -23,7 +23,8 @@ import play from '../bilder/play_dark.png';
 const store = require('./Storage');
 
 import Info from './Info';
-const information = 'Välkommen till MT-Duellen! Tävla i appen och vinn fina priser på mässdagen. Det är endast MT-studenter som kan delta i tävlingen';
+const information =
+  'Välkommen till MT-Duellen! Tävla i appen och vinn fina priser på mässdagen. Det är endast MT-studenter som kan delta i tävlingen';
 
 const Home = ({}) => {
   const [infoModal, setInfoModal] = useState(false)
@@ -74,7 +75,10 @@ const Home = ({}) => {
                 margin: 5,
               }}
             />
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3654841e7f705a18aecbfee4d2a1c6af4dc65cb9
           </View>
 
           <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
@@ -117,16 +121,14 @@ const styles = StyleSheet.create({
   infoBtn: {
     padding: 0,
     opacity: 0.9,
-    zIndex: 1
+    zIndex: 1,
   },
   logoContainer: {
-    // top: 80,
-    // height: 100,
-    // flex: 1,
-    flex: 2,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    // marginTop: 50
+    top: 20,
+    height: 100,
+    flex: 1,
+    // justifyContent: 'flex-start',
+    // alignItems: 'flex-start',
   },
   img: {
     width: '50%',
@@ -138,7 +140,10 @@ const styles = StyleSheet.create({
     width: 300,
     margin: 10,
     // backgroundColor: 'green',
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3654841e7f705a18aecbfee4d2a1c6af4dc65cb9
   },
   imgFlex2: {
     resizeMode: 'contain',
