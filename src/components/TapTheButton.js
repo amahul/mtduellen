@@ -4,6 +4,7 @@ import {
   Text,
   StyleSheet,
   TouchableWithoutFeedback,
+  Button,
   ImageBackground,
   Image,
 } from 'react-native';
@@ -49,6 +50,7 @@ class TapTheButton extends Component {
     this.setState({
       secondTimer: true,
       showLauncher: false,
+      firstTimer: false,
     });
   };
 
@@ -144,7 +146,7 @@ class TapTheButton extends Component {
           position={'center'}
           isOpen={this.state.secondModal}>
           <Text style={{
-            fontSize:30, fontWeight:'bold', font: 'Barlow', top: 35,
+            fontSize:30, fontWeight:'bold', top: 35,
           }}>{endText}</Text>
 
           {/* <Link to="/" underlayColor="#f0f4f7">
@@ -162,12 +164,15 @@ class TapTheButton extends Component {
         {/* )} */}
         {/* LAUNCHER */}
         {/* showLauncher problem */}
-        {this.state.showLauncher ? (
+        {this.state.showLauncher && (
           <Launcher
             running={this.state.firstTimer}
             startGame={this.startGame}
           />
-        ) : null}
+        )}
+        {/* {this.state.showLauncher && (
+            <Button onPress={this.startGame} title="klicka"></Button> 
+        )} */}
       </View>
     );
   }

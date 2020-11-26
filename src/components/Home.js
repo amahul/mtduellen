@@ -29,13 +29,14 @@ const information =
 const Home = ({}) => {
   const [infoModal, setInfoModal] = useState(false)
 
+  closeInfo = () => {
+    setInfoModal(false)
+  };
+
   openInfo = () => {
     setInfoModal(true)
   };
 
-  closeInfo = () => {
-    setInfoModal(false)
-  };
 
   useEffect(() => {
     const fetch = async () => {
@@ -51,7 +52,7 @@ const Home = ({}) => {
           <TouchableOpacity
             style={styles.infoBtn}
             activeOpacity={0.5}
-            onPress={this.openInfo}
+            onPress={openInfo}
             //style={styles.infoBtn}
             title="Info">
             <Image
@@ -75,10 +76,9 @@ const Home = ({}) => {
                 margin: 5,
               }}
             />
-<<<<<<< HEAD
 
-=======
->>>>>>> 3654841e7f705a18aecbfee4d2a1c6af4dc65cb9
+          
+
           </View>
 
           <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   logoContainer: {
-    top: 20,
+    top: -350,
     height: 100,
     flex: 1,
     // justifyContent: 'flex-start',
@@ -140,10 +140,6 @@ const styles = StyleSheet.create({
     width: 300,
     margin: 10,
     // backgroundColor: 'green',
-<<<<<<< HEAD
-
-=======
->>>>>>> 3654841e7f705a18aecbfee4d2a1c6af4dc65cb9
   },
   imgFlex2: {
     resizeMode: 'contain',

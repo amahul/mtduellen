@@ -18,14 +18,6 @@ const Counter = ({running, seconds, endGame}) => {
         timeToShow={['S']}
         timeLabels={{m: null, s: null}}
         running={running}
-<<<<<<< HEAD
-        style={{
-
-          // alignSelf: 'center',
-          // alignItems:'center',
-          // justifyContent: 'flex-end',
-          }}
-=======
         style={
           {
             // alignSelf: 'center',
@@ -33,7 +25,6 @@ const Counter = ({running, seconds, endGame}) => {
             // justifyContent: 'flex-end',
           }
         }
->>>>>>> 3654841e7f705a18aecbfee4d2a1c6af4dc65cb9
       />
     </View>
   );
