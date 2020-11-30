@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
-// import './Storage.js';
-// const store = require('./Storage'); // Ska dessa vara kvar?
+//import './Storage.js';
+const store = require('./Storage'); // Ska dessa vara kvar?
 
 import {
   ImageBackground,
@@ -48,7 +48,8 @@ class Home extends Component {
 
   render() {
     let activeScore = store.readData();
-
+    console.log(activeScore);
+    alert(activeScore);
     return (
       <ImageBackground style={styles.imageBackground}>
         <View style={styles.infoBtnHolder}>
@@ -80,7 +81,6 @@ class Home extends Component {
               }}
             />
           </View>
-
           <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
             <Link to="/Tap">
               <Image
@@ -123,9 +123,10 @@ const styles = StyleSheet.create({
     padding: 0,
     opacity: 0.9,
     zIndex: 1,
+    elevation: 1,
   },
   logoContainer: {
-    top: 20,
+    top: -320,
     height: 100,
     flex: 1,
     // justifyContent: 'flex-start',

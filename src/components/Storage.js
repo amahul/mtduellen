@@ -5,10 +5,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // ----------------------------------
 
 const saveData = async (value) => {
+  alert('store');
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem('@storage_Key', jsonValue);
-    alert(value);
+    alert('store');
   } catch (e) {
     alert(e);
   }
@@ -17,15 +18,12 @@ const saveData = async (value) => {
 const readData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('@storage_Key');
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
+    console.log('value: ' + jsonValue);
+    return jsonValue;
   } catch (e) {
     alert(e);
   }
 };
-
-// useEffect(() => {
-//   readData()
-// }, [])
 
 const clearStorage = async () => {
   try {

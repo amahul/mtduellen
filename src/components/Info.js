@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 11,
+    zIndex: 11,
     width: '90%',
     height: '90%',
     borderRadius: 5,
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     textAlign: 'center',
-    padding: 10
+    padding: 10,
   },
   closeInfoBtn: {
     backgroundColor: 'lightgrey',
@@ -36,8 +37,10 @@ const styles = StyleSheet.create({
     width: 58,
     height: 58,
     right: -140,
-    top: -235,
+    top: -200,
     fontSize: 30,
+    zIndex: 300,
+    elevation: 300,
   },
 });
 

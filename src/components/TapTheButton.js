@@ -150,12 +150,12 @@ class TapTheButton extends Component {
 
         {/* )} */}
         {/* LAUNCHER */}
-        {this.state.showLauncher ? (
+        {this.state.showLauncher && (
           <Launcher
             running={this.state.firstTimer}
             startGame={this.startGame}
           />
-        ) : null}
+        )}
       </View>
     );
   }
