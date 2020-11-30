@@ -19,6 +19,13 @@ const Popup = ({content, modalState, action, button, link}) => {
           <Text>Nästa spel</Text>
         </Link>
       )}
+
+      {link && (
+        <Link to={action} underlayColor="#f0f4f7">
+          <Text>Avsluta spelet</Text>
+        </Link>
+      )}
+
     </Modal>
   );
 };

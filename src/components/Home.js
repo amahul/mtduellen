@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { useEffect, useState} from 'react';
 
 //import './Storage.js';
 const store = require('./Storage'); // Ska dessa vara kvar?
@@ -20,43 +20,46 @@ import logo2 from '../bilder/logo_alt2.png';
 import highscores from '../bilder/highscore_dark.png';
 import highscoresExpanded from '../bilder/highscores_expanded.png';
 import play from '../bilder/play_dark.png';
+const store = require('./Storage');
 
 import Info from './Info';
 const information =
   'Välkommen till MT-Duellen! Tävla i appen och vinn fina priser på mässdagen. Det är endast MT-studenter som kan delta i tävlingen';
 
-class Home extends Component {
-  state = {
-    infoModal: false,
+const Home = ({}) => {
+  const [infoModal, setInfoModal] = useState(false)
+
+  closeInfo = () => {
+    setInfoModal(false)
   };
 
   openInfo = () => {
-    if (!this.state.infoModal) {
-      this.setState({
-        infoModal: true,
-      });
-    }
+    setInfoModal(true)
   };
 
-  closeInfo = () => {
-    if (this.state.infoModal) {
-      this.setState({
-        infoModal: false,
-      });
-    }
-  };
 
+<<<<<<< HEAD
   render() {
     let activeScore = store.readData();
     console.log(activeScore);
     alert(activeScore);
+=======
+  useEffect(() => {
+    const fetch = async () => {
+      let activeScore = await store.readData();
+      console.log(activeScore);
+    }
+    fetch()
+  }, [])
+
+>>>>>>> 349f1559598909e4b3cc63170e74729d51dcc6bf
     return (
       <ImageBackground style={styles.imageBackground}>
         <View style={styles.infoBtnHolder}>
           <TouchableOpacity
             style={styles.infoBtn}
             activeOpacity={0.5}
-            onPress={this.openInfo}
+            onPress={openInfo}
             //style={styles.infoBtn}
             title="Info">
             <Image
@@ -80,6 +83,9 @@ class Home extends Component {
                 margin: 5,
               }}
             />
+
+          
+
           </View>
           <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
             <Link to="/Tap">
@@ -93,13 +99,12 @@ class Home extends Component {
           {/* INFO MODAL */}
           <Info
             information={information}
-            modalState={this.state.infoModal}
-            closeInfo={this.closeInfo}
+            modalState={infoModal}
+            closeInfo={closeInfo}
           />
         </View>
       </ImageBackground>
     );
-  }
 }
 
 const styles = StyleSheet.create({
@@ -126,7 +131,11 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   logoContainer: {
+<<<<<<< HEAD
     top: -320,
+=======
+    top: -350,
+>>>>>>> 349f1559598909e4b3cc63170e74729d51dcc6bf
     height: 100,
     flex: 1,
     // justifyContent: 'flex-start',
