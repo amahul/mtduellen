@@ -17,7 +17,12 @@ import Counter from './Counter';
 import knapp from '../bilder/button2.png';
 import arrow from '../bilder/arrow.png';
 import Modal from 'react-native-modalbox';
-import play from '../bilder/play_dark.png';
+//import play from '../bilder/play_dark.png';
+import avsluta from '../bilder/avsluta.png';
+import braJobbat from '../bilder/braJobbat.png';
+
+import spelregler from '../bilder/spelregler.png';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 const store = require('./Storage');
 
@@ -141,31 +146,52 @@ const TapTheButton = ({}) => {
           link={true}
           action="/"
         /> */}
-      <Modal
-        style={styles.modal}
-        backdrop={false}
-        position={'center'}
-        isOpen={secondModal}>
-        <Text
-          style={{
-            fontSize: 30,
-            fontWeight: 'bold',
-            top: 35,
-          }}>
-          Du fick {count} poäng!
-        </Text>
+      
 
-        {/* <Link to="/" underlayColor="#f0f4f7">
+        <Modal
+          style={styles.modal}
+          backdrop={false}
+          position={'center'}
+          isOpen={secondModal}>
+            <Image
+              source={braJobbat}
+              style={{ resizeMode: 'contain',
+              width: 200,
+              alignItems: 'flex-start',
+              height: 70,
+              bottom: 0,
+              margin: 5,
+              }} 
+              /> 
+          <Text
+            style={{
+              fontSize: 30,
+              fontWeight: 'bold',
+              top: 23,
+            }}>
+            {endText}
+          </Text>
+
+          {/* <Link to="/" underlayColor="#f0f4f7">
             <Text>Nästa spel</Text>
           </Link> */}
 
-        <Link to="/">
-          <Image
-            source={play}
-            style={{width: 250, height: 70, bottom: 0, margin: 5, top: 75}}
-          />
-        </Link>
-      </Modal>
+          <Link to="/">
+            <Image
+              source={avsluta}
+              style={{width: 250, height: 70, bottom: 0, margin: 5, top: 55}}
+            />
+          </Link>
+        </Modal>
+
+        {/* )} */}
+        {/* LAUNCHER */}
+        {this.state.showLauncher && (
+          <Launcher
+            running={firstTimer}
+            startGame={startGame}
+          />)}
+
       {/* )} */}
       {/* LAUNCHER */}
       {showLauncher && <Launcher running={firstTimer} startGame={startGame} />}
