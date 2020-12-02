@@ -1,7 +1,6 @@
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-//import './Storage.js';
-const store = require('./Storage'); // Ska dessa vara kvar?
+const store = require('./Storage');
 
 import {
   ImageBackground,
@@ -20,98 +19,92 @@ import logo2 from '../bilder/logo_alt2.png';
 import highscores from '../bilder/highscore_dark.png';
 import highscoresExpanded from '../bilder/highscores_expanded.png';
 import play from '../bilder/play_dark.png';
-const store = require('./Storage');
 
 import Info from './Info';
+import {greaterThan} from 'react-native-reanimated';
 const information =
   'Välkommen till MT-Duellen! Tävla i appen och vinn fina priser på mässdagen. Det är endast MT-studenter som kan delta i tävlingen';
 
 const Home = ({}) => {
-  const [infoModal, setInfoModal] = useState(false)
+  const [infoModal, setInfoModal] = useState(false);
 
   closeInfo = () => {
-    setInfoModal(false)
+    setInfoModal(false);
   };
 
   openInfo = () => {
-    setInfoModal(true)
+    setInfoModal(true);
   };
 
-
-<<<<<<< HEAD
-  render() {
-    let activeScore = store.readData();
-    console.log(activeScore);
-    alert(activeScore);
-=======
   useEffect(() => {
     const fetch = async () => {
       let activeScore = await store.readData();
       console.log(activeScore);
-    }
-    fetch()
-  }, [])
+    };
+    fetch();
+  }, []);
 
->>>>>>> 349f1559598909e4b3cc63170e74729d51dcc6bf
-    return (
-      <ImageBackground style={styles.imageBackground}>
-        <View style={styles.infoBtnHolder}>
-          <TouchableOpacity
-            style={styles.infoBtn}
-            activeOpacity={0.5}
-            onPress={openInfo}
-            //style={styles.infoBtn}
-            title="Info">
-            <Image
-              source={icon}
-              style={{width: 70, height: 70, bottom: 0, margin: 30}}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.container}>
-          <View style={styles.logoContainer}>
-            <Image source={logo2} style={styles.imgFlex} />
-          </View>
-          <View style={styles.imgFlex2}>
-            <Image
-              source={highscoresExpanded}
-              style={{
-                resizeMode: 'stretch',
-                width: 400,
-                height: 400,
-                margin: 5,
-              }}
-            />
-
-          
-
-          </View>
-          <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
-            <Link to="/Tap">
-              <Image
-                source={play}
-                style={{width: 300, height: 70, bottom: 0, margin: 5}}
-              />
-            </Link>
-          </TouchableOpacity>
-
-          {/* INFO MODAL */}
-          <Info
-            information={information}
-            modalState={infoModal}
-            closeInfo={closeInfo}
+  return (
+    <ImageBackground style={styles.imageBackground}>
+      <View style={styles.infoBtnHolder}>
+        <TouchableOpacity
+          style={styles.infoBtn}
+          activeOpacity={0.5}
+          onPress={openInfo}
+          title="Info">
+          <Image
+            source={icon}
+            style={{width: 70, height: 70, bottom: 0, margin: 30}}
           />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.container}>
+        <View style={styles.logoContainer}>
+          <Image source={logo2} style={styles.imgFlex} />
         </View>
-      </ImageBackground>
-    );
-}
+        {/* <View style={styles.imgFlex2}>
+          {/* <Image
+            source={highscoresExpanded}
+            style={{
+              resizeMode: 'stretch',
+              width: 400,
+              height: 400,
+              margin: 5,
+            }}
+          /> 
+          
+        </View> */}
+        <View style={styles.scoreBoard}>
+          <Text style={styles.text}>Slå ditt rekord: </Text>
+
+          <Text style={styles.text}>Hej</Text>
+        </View>
+        <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
+          <Link to="/Tap">
+            <Image
+              source={play}
+              style={{width: 300, height: 70, bottom: 0, margin: 5}}
+            />
+          </Link>
+        </TouchableOpacity>
+
+        {/* INFO MODAL */}
+        <Info
+          information={information}
+          modalState={infoModal}
+          closeInfo={closeInfo}
+        />
+      </View>
+    </ImageBackground>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 3,
     alignItems: 'center',
-    alignSelf: 'stretch',
+    //alignSelf: 'stretch',
   },
   imageBackground: {
     flex: 1,
@@ -131,58 +124,40 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   logoContainer: {
-<<<<<<< HEAD
-    top: -320,
-=======
-    top: -350,
->>>>>>> 349f1559598909e4b3cc63170e74729d51dcc6bf
-    height: 100,
-    flex: 1,
-    // justifyContent: 'flex-start',
-    // alignItems: 'flex-start',
-  },
-  img: {
-    width: '50%',
-    height: '50%',
-    resizeMode: 'contain',
+    flex: 2,
+    width: '100%',
+    alignItems: 'center',
   },
   imgFlex: {
     resizeMode: 'contain',
-    width: 300,
-    margin: 10,
-    // backgroundColor: 'green',
+    width: '80%',
+    maxHeight: '100%',
   },
-  imgFlex2: {
-    resizeMode: 'contain',
-    flex: 3,
-    flexDirection: 'column',
-    width: 300,
-    padding: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    // backgroundColor: 'blue',
-  },
-  logo: {
-    width: 255,
-    height: 190,
-    top: 10,
-  },
-  text: {
-    fontSize: 30,
-    textAlign: 'center',
+  // imgFlex2: {
+  //   resizeMode: 'contain',
+  //   flex: 3,
+  //   flexDirection: 'column',
+  //   width: 300,
+  //   padding: 10,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   // backgroundColor: 'blue',
+  // },
+  scoreBoard: {
+    flex: 2,
   },
   text: {
     padding: 15,
     margin: 5,
-    top: 200,
+    //top: 200,
     textAlign: 'center',
     borderRadius: 30,
     fontSize: 40,
     fontWeight: 'bold',
-    color: '#13283C',
+    //color: '#13283C',
+    color: 'white',
     lineHeight: 50,
-    fontFamily: 'serif',
-    //fontFamily: 'Helvetica Bold',
+    //fontFamily: 'serif',
   },
 });
 

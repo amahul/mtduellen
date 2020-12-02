@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {
   View,
   Text,
@@ -14,7 +14,6 @@ import {Link} from 'react-router-native';
 import Popup from './Popup';
 import Launcher from './Launcher';
 import Counter from './Counter';
-import background from '../bilder/homeBackground.png';
 import knapp from '../bilder/button2.png';
 import arrow from '../bilder/arrow.png';
 import Modal from 'react-native-modalbox';
@@ -34,6 +33,8 @@ class TapTheButton extends Component {
     showLauncher: true,
   };
 
+  //const [count, setCount] = useState("0");
+
   onPress = () => {
     // change size of button and add to count
     if (this.state.secondTimer) {
@@ -50,7 +51,7 @@ class TapTheButton extends Component {
     this.setState({
       secondTimer: true,
       showLauncher: false,
-      firstTimer: false,
+      //firstTimer: false,
     });
   };
 
