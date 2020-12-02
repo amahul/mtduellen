@@ -169,7 +169,7 @@ const TapTheButton = ({}) => {
               fontWeight: 'bold',
               top: 23,
             }}>
-            {endText}
+            {count}
           </Text>
 
           {/* <Link to="/" underlayColor="#f0f4f7">
@@ -185,12 +185,7 @@ const TapTheButton = ({}) => {
         </Modal>
 
         {/* )} */}
-        {/* LAUNCHER */}
-        {this.state.showLauncher && (
-          <Launcher
-            running={firstTimer}
-            startGame={startGame}
-          />)}
+
 
       {/* )} */}
       {/* LAUNCHER */}
