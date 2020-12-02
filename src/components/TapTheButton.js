@@ -18,6 +18,7 @@ import knapp from '../bilder/button2.png';
 import arrow from '../bilder/arrow.png';
 import Modal from 'react-native-modalbox';
 import play from '../bilder/play_dark.png';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 const store = require('./Storage');
 
@@ -72,6 +73,7 @@ class TapTheButton extends Component {
   render() {
     const gameTimer = 5;
     const gameInstruction = 'Tryck på knappen så många gånger du kan';
+    //<b>Foo</b>
     let endText = 'Du fick ' + this.state.count + ' poäng';
 
     return (
@@ -144,7 +146,7 @@ class TapTheButton extends Component {
           position={'center'}
           isOpen={this.state.secondModal}>
           <Text style={{
-            fontSize:30, fontWeight:'bold', font: 'Barlow', top: 35,
+            fontSize:30, font: 'Barlow', top: 35,
           }}>{endText}</Text>
 
           {/* <Link to="/" underlayColor="#f0f4f7">

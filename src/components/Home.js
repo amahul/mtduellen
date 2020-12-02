@@ -75,10 +75,6 @@ const Home = ({}) => {
                 margin: 5,
               }}
             />
-<<<<<<< HEAD
-
-=======
->>>>>>> 3654841e7f705a18aecbfee4d2a1c6af4dc65cb9
           </View>
 
           <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
@@ -140,10 +136,6 @@ const styles = StyleSheet.create({
     width: 300,
     margin: 10,
     // backgroundColor: 'green',
-<<<<<<< HEAD
-
-=======
->>>>>>> 3654841e7f705a18aecbfee4d2a1c6af4dc65cb9
   },
   imgFlex2: {
     resizeMode: 'contain',
