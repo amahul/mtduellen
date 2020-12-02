@@ -22,6 +22,7 @@ import play from '../bilder/play_dark.png';
 
 import Info from './Info';
 import {greaterThan} from 'react-native-reanimated';
+
 const information =
   'Välkommen till MT-Duellen! Tävla i appen och vinn fina priser på mässdagen. Det är endast MT-studenter som kan delta i tävlingen';
 
@@ -41,7 +42,6 @@ const Home = ({}) => {
     const fetch = async () => {
       let tempScore = await store.readData();
       setActiveScore(tempScore);
-      
     };
     fetch();
   }, []);
@@ -77,10 +77,17 @@ const Home = ({}) => {
           /> 
           
         </View> */}
-        <View style={styles.scoreBoard}>
-          <Text style={styles.text}>Slå ditt rekord: </Text>
-          <Text style={styles.text}>{activeScore}</Text>
-        </View>
+        {activeScore != '0' ? (
+          <View style={styles.scoreBoard}>
+            <Text style={styles.text}>Slå ditt rekord: </Text>
+            <Text style={styles.text}>{activeScore}</Text>
+          </View>
+        ) : (
+          <View style={styles.scoreBoard}>
+            <Text style={styles.text}>Spela för att få ett highscore </Text>
+          </View>
+        )}
+
         <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
           <Link to="/Tap">
             <Image
