@@ -21,164 +21,136 @@ import play from '../bilder/play_dark.png';
 
 const store = require('./Storage');
 
-class TapTheButton extends Component {
-  state = {
-    count: 0,
-    size: 150,
-    fontSize: 40,
-    secondTimer: false,
-    firstModal: true,
-    secondModal: false,
-    firstTimer: false,
-    showLauncher: true,
-  };
+const gameTimer = 5;
+const gameInstruction = 'Tryck på knappen så många gånger du kan';
 
-  //const [count, setCount] = useState("0");
+const TapTheButton = ({}) => {
+  const [count, setCount] = useState(0);
+  const [size, setSize] = useState(150);
+  const [firstTimer, setFirstTimer] = useState(false);
+  const [secondTimer, setSecondTimer] = useState(false);
+
+  const [firstModal, setFirstModal] = useState(true);
+  const [secondModal, setSecondModal] = useState(false);
+
+  const [showLauncher, setShowLauncher] = useState(true);
 
   onPress = () => {
     // change size of button and add to count
-    if (this.state.secondTimer) {
-      this.setState({
-        count: this.state.count + 1,
-        size: this.state.size + 5,
-        fontSize: this.state.fontSize + 1,
-      });
+    if (secondTimer) {
+      setCount(count + 1);
+      setSize(size + 5);
     }
   };
 
   startGame = () => {
-    console.log('fooo');
-    this.setState({
-      secondTimer: true,
-      showLauncher: false,
-      //firstTimer: false,
-    });
+    setSecondTimer(true);
+    setShowLauncher(false);
   };
 
   endGame = () => {
-    store.saveData(this.state.count);
+    store.saveData(count);
 
-    this.setState({
-      secondModal: true,
-      secondTimer: false,
-    });
+    setSecondModal(true);
+    setSecondTimer(false);
   };
 
   startLauncher = () => {
-    this.setState({
-      firstModal: false,
-      firstTimer: true,
-      //showLauncher: true,
-    });
+    setFirstModal(false);
+    setFirstTimer(true);
+    console.log('firstTimer');
   };
 
-  render() {
-    const gameTimer = 5;
-    const gameInstruction = 'Tryck på knappen så många gånger du kan';
-    let endText = 'Du fick ' + this.state.count + ' poäng';
-
-    return (
-      <View style={styles.container}>
-        <Link to="/">
-          <Image source={arrow} style={styles.icon} />
-        </Link>
-        <View style={styles.counterContainer}>
-          {/* GAME COUNTER */}
-          {/* {this.state.secondTimer && ( */}
-          <Counter
-            seconds={gameTimer}
-            running={this.state.secondTimer}
-            endGame={this.endGame}
-          />
-          {/* )} */}
-        </View>
-        {/* MINIGAME CONTENT */}
-        <ImageBackground style={styles.image}>
-          <TouchableWithoutFeedback onPress={this.onPress}>
-            <View
-              style={{
-                width: this.state.size,
-                height: this.state.size,
-                top: -110,
-              }}>
-              <ImageBackground
-                source={knapp}
-                style={(styles.button, styles.container)}>
-                <Text
-                  style={
-                    (styles.text,
-                    {
-                      fontSize: this.state.fontSize,
-                      color: 'white',
-                      alignSelf: 'center',
-                    })
-                  }>
-                  {this.state.count}
-                </Text>
-              </ImageBackground>
-            </View>
-          </TouchableWithoutFeedback>
-        </ImageBackground>
-        {/* MINIGAME CONTENT END */}
-        {/* FIRST MODAL */}
-        {/* {this.state.firstModal && ( */}
-        <Popup
-          content={gameInstruction}
-          button={true}
-          link={false}
-          modalState={this.state.firstModal}
-          action={this.startLauncher}
-        />
+  return (
+    <View style={styles.container}>
+      <Link to="/">
+        <Image source={arrow} style={styles.icon} />
+      </Link>
+      <View style={styles.counterContainer}>
+        {/* GAME COUNTER */}
+        {/* {this.state.secondTimer && ( */}
+        <Counter seconds={gameTimer} running={secondTimer} endGame={endGame} />
         {/* )} */}
-        {/* SECOND MODAL */}
-
-        {/* {this.state.secondModal && ( */}
-        {/* <Popup
+      </View>
+      {/* MINIGAME CONTENT */}
+      <ImageBackground style={styles.image}>
+        <TouchableWithoutFeedback onPress={onPress}>
+          <View
+            style={{
+              width: size,
+              height: size,
+              top: -110,
+            }}>
+            <ImageBackground
+              source={knapp}
+              style={(styles.button, styles.container)}>
+              <Text
+                style={
+                  (styles.text,
+                  {
+                    fontSize: count + 40,
+                    color: 'white',
+                    alignSelf: 'center',
+                  })
+                }>
+                {count}
+              </Text>
+            </ImageBackground>
+          </View>
+        </TouchableWithoutFeedback>
+      </ImageBackground>
+      {/* MINIGAME CONTENT END */}
+      {/* FIRST MODAL */}
+      {/* {this.state.firstModal && ( */}
+      <Popup
+        content={gameInstruction}
+        button={true}
+        link={false}
+        modalState={firstModal}
+        action={startLauncher}
+      />
+      {/* )} */}
+      {/* SECOND MODAL */}
+      {/* {this.state.secondModal && ( */}
+      {/* <Popup
           content={endText}
           button={false}
           modalState={this.state.secondModal}
           link={true}
           action="/"
         /> */}
+      <Modal
+        style={styles.modal}
+        backdrop={false}
+        position={'center'}
+        isOpen={secondModal}>
+        <Text
+          style={{
+            fontSize: 30,
+            fontWeight: 'bold',
+            top: 35,
+          }}>
+          Du fick {count} poäng!
+        </Text>
 
-        <Modal
-          style={styles.modal}
-          backdrop={false}
-          position={'center'}
-          isOpen={this.state.secondModal}>
-          <Text
-            style={{
-              fontSize: 30,
-              fontWeight: 'bold',
-              top: 35,
-            }}>
-            {endText}
-          </Text>
-
-          {/* <Link to="/" underlayColor="#f0f4f7">
+        {/* <Link to="/" underlayColor="#f0f4f7">
             <Text>Nästa spel</Text>
           </Link> */}
 
-          <Link to="/">
-            <Image
-              source={play}
-              style={{width: 250, height: 70, bottom: 0, margin: 5, top: 75}}
-            />
-          </Link>
-        </Modal>
-
-        {/* )} */}
-        {/* LAUNCHER */}
-        {this.state.showLauncher && (
-          <Launcher
-            running={this.state.firstTimer}
-            startGame={this.startGame}
+        <Link to="/">
+          <Image
+            source={play}
+            style={{width: 250, height: 70, bottom: 0, margin: 5, top: 75}}
           />
-        )}
-      </View>
-    );
-  }
-}
+        </Link>
+      </Modal>
+      {/* )} */}
+      {/* LAUNCHER */}
+      {showLauncher && <Launcher running={firstTimer} startGame={startGame} />}
+      {/* <Button onPress={startGame} title="Kör igång" /> */}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
