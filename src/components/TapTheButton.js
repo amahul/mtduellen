@@ -34,7 +34,7 @@ class TapTheButton extends Component {
   };
 
   //const [count, setCount] = useState("0");
-
+  
   onPress = () => {
     // change size of button and add to count
     if (this.state.secondTimer) {

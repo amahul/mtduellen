@@ -27,6 +27,7 @@ const information =
 
 const Home = ({}) => {
   const [infoModal, setInfoModal] = useState(false);
+  const [activeScore, setActiveScore] = useState('0');
 
   closeInfo = () => {
     setInfoModal(false);
@@ -38,8 +39,9 @@ const Home = ({}) => {
 
   useEffect(() => {
     const fetch = async () => {
-      let activeScore = await store.readData();
-      console.log(activeScore);
+      let tempScore = await store.readData();
+      setActiveScore(tempScore);
+      
     };
     fetch();
   }, []);
@@ -77,8 +79,7 @@ const Home = ({}) => {
         </View> */}
         <View style={styles.scoreBoard}>
           <Text style={styles.text}>Slå ditt rekord: </Text>
-
-          <Text style={styles.text}>Hej</Text>
+          <Text style={styles.text}>{activeScore}</Text>
         </View>
         <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
           <Link to="/Tap">
