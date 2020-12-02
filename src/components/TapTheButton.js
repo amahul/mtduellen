@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -26,121 +26,120 @@ import { BorderlessButton } from 'react-native-gesture-handler';
 
 const store = require('./Storage');
 
-class TapTheButton extends Component {
-  state = {
-    count: 0,
-    size: 150,
-    fontSize: 40,
-    secondTimer: false,
-    firstModal: true,
-    secondModal: false,
-    firstTimer: false,
-    showLauncher: true,
-  };
+const gameTimer = 5;
+const gameInstruction = 'Tryck på knappen så många gånger du kan';
 
-  //const [count, setCount] = useState("0");
+const TapTheButton = ({}) => {
+  const [count, setCount] = useState(0);
+  const [size, setSize] = useState(150);
+  const [firstTimer, setFirstTimer] = useState(false);
+  const [secondTimer, setSecondTimer] = useState(false);
+
+  const [firstModal, setFirstModal] = useState(true);
+  const [secondModal, setSecondModal] = useState(false);
+
+  const [showLauncher, setShowLauncher] = useState(true);
+  //const [activeScore, setActiveScore] = useState('0');
+  const [highScore, setHighScore] = useState('0');
 
   onPress = () => {
     // change size of button and add to count
-    if (this.state.secondTimer) {
-      this.setState({
-        count: this.state.count + 1,
-        size: this.state.size + 5,
-        fontSize: this.state.fontSize + 1,
-      });
+    if (secondTimer) {
+      setCount(count + 1);
+      setSize(size + 5);
     }
   };
 
   startGame = () => {
-    console.log('fooo');
-    this.setState({
-      secondTimer: true,
-      showLauncher: false,
-      //firstTimer: false,
-    });
+    setSecondTimer(true);
+    setShowLauncher(false);
   };
 
   endGame = () => {
-    store.saveData(this.state.count);
+    let myData = null;
 
-    this.setState({
-      secondModal: true,
-      secondTimer: false,
-    });
+    // Save first score, or when new highscore
+    if (highScore === undefined || count > highScore) {
+      console.log('Save new highScore');
+      myData = {activeScore: count, highScore: count};
+    } else {
+      // save old highScore
+      console.log('Save old highScore');
+      myData = {activeScore: count, highScore: highScore};
+    }
+
+    store.saveData(myData);
+
+    setSecondModal(true);
+    setSecondTimer(false);
   };
 
   startLauncher = () => {
-    this.setState({
-      firstModal: false,
-      firstTimer: true,
-      //showLauncher: true,
-    });
+    setFirstModal(false);
+    setFirstTimer(true);
   };
 
-  render() {
-    const gameTimer = 5;
-    const gameInstruction = 'Tryck på knappen så många gånger du kan';
-    //<b>Foo</b>
-    let endText = 'Du fick ' + this.state.count + ' poäng';
+  useEffect(() => {
+    const fetch = async () => {
+      let tempScore = await store.readData();
+      setHighScore(tempScore.highScore);
+      console.log(tempScore.highScore);
+    };
+    fetch();
+  }, []);
 
-    return (
-      <View style={styles.container}>
-        <Link to="/">
-          <Image source={arrow} style={styles.icon} />
-        </Link>
-        <View style={styles.counterContainer}>
-          {/* GAME COUNTER */}
-          {/* {this.state.secondTimer && ( */}
-          <Counter
-            seconds={gameTimer}
-            running={this.state.secondTimer}
-            endGame={this.endGame}
-          />
-          {/* )} */}
-        </View>
-        {/* MINIGAME CONTENT */}
-        <ImageBackground style={styles.image}>
-          <TouchableWithoutFeedback onPress={this.onPress}>
-            <View
-              style={{
-                width: this.state.size,
-                height: this.state.size,
-                top: -110,
-              }}>
-              <ImageBackground
-                source={knapp}
-                style={(styles.button, styles.container)}>
-                <Text
-                  style={
-                    (styles.text,
-                    {
-                      fontSize: this.state.fontSize,
-                      color: 'white',
-                      alignSelf: 'center',
-                    })
-                  }>
-                  {this.state.count}
-                </Text>
-              </ImageBackground>
-            </View>
-          </TouchableWithoutFeedback>
-        </ImageBackground>
-        {/* MINIGAME CONTENT END */}
-        {/* FIRST MODAL */}
-        {/* {this.state.firstModal && ( */}
-
-        <Popup  
-          content={gameInstruction}
-          button={true}
-          link={false}
-          modalState={this.state.firstModal}
-          action={this.startLauncher}
-        />
+  return (
+    <View style={styles.container}>
+      <Link to="/">
+        <Image source={arrow} style={styles.icon} />
+      </Link>
+      <View style={styles.counterContainer}>
+        {/* GAME COUNTER */}
+        {/* {this.state.secondTimer && ( */}
+        <Counter seconds={gameTimer} running={secondTimer} endGame={endGame} />
         {/* )} */}
-        {/* SECOND MODAL */}
-
-        {/* {this.state.secondModal && ( */}
-        {/* <Popup
+      </View>
+      {/* MINIGAME CONTENT */}
+      <ImageBackground style={styles.image}>
+        <TouchableWithoutFeedback onPress={onPress}>
+          <View
+            style={{
+              width: size,
+              height: size,
+              top: -110,
+            }}>
+            <ImageBackground
+              source={knapp}
+              style={(styles.button, styles.container)}>
+              <Text
+                style={
+                  (styles.text,
+                  {
+                    fontSize: count + 40,
+                    color: 'white',
+                    alignSelf: 'center',
+                  })
+                }>
+                {count}
+              </Text>
+            </ImageBackground>
+          </View>
+        </TouchableWithoutFeedback>
+      </ImageBackground>
+      {/* MINIGAME CONTENT END */}
+      {/* FIRST MODAL */}
+      {/* {this.state.firstModal && ( */}
+      <Popup
+        content={gameInstruction}
+        button={true}
+        link={false}
+        modalState={firstModal}
+        action={startLauncher}
+      />
+      {/* )} */}
+      {/* SECOND MODAL */}
+      {/* {this.state.secondModal && ( */}
+      {/* <Popup
           content={endText}
           button={false}
           modalState={this.state.secondModal}
@@ -153,7 +152,7 @@ class TapTheButton extends Component {
           style={styles.modal}
           backdrop={false}
           position={'center'}
-          isOpen={this.state.secondModal}>
+          isOpen={secondModal}>
             <Image
               source={braJobbat}
               style={{ resizeMode: 'contain',
@@ -189,14 +188,17 @@ class TapTheButton extends Component {
         {/* LAUNCHER */}
         {this.state.showLauncher && (
           <Launcher
-            running={this.state.firstTimer}
-            startGame={this.startGame}
-          />
-        )}
-      </View>
-    );
-  }
-}
+            running={firstTimer}
+            startGame={startGame}
+          />)}
+
+      {/* )} */}
+      {/* LAUNCHER */}
+      {showLauncher && <Launcher running={firstTimer} startGame={startGame} />}
+      {/* <Button onPress={startGame} title="Kör igång" /> */}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

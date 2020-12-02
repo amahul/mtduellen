@@ -10,7 +10,10 @@ const Launcher = ({running, startGame}) => {
         size={60}
         until={3}
         onFinish={() => {
-          startGame();
+          setTimeout(() => {
+            startGame();
+          }, 10);
+          console.log('startGame');
         }}
         digitStyle={{
           borderWidth: 0,

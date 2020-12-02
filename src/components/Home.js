@@ -26,11 +26,14 @@ import logo3 from '../bilder/logo_mtduellen.png';
 
 import Info from './Info';
 import {greaterThan} from 'react-native-reanimated';
+
 const information =
   'Välkommen till MT-Duellen! Tävla i appen och vinn fina priser på mässdagen. Det är endast MT-studenter som kan delta i tävlingen';
 
 const Home = ({}) => {
   const [infoModal, setInfoModal] = useState(false);
+  const [activeScore, setActiveScore] = useState('0');
+  const [highScore, setHighScore] = useState('0');
 
   closeInfo = () => {
     setInfoModal(false);
@@ -42,8 +45,9 @@ const Home = ({}) => {
 
   useEffect(() => {
     const fetch = async () => {
-      let activeScore = await store.readData();
-      console.log(activeScore);
+      let tempScore = await store.readData();
+      setActiveScore(tempScore.activeScore);
+      setHighScore(tempScore.highScore);
     };
     fetch();
   }, []);
@@ -79,16 +83,21 @@ const Home = ({}) => {
           /> 
           
         </View> */}
-
-        <View style={styles.scoreBoard}>
-          <Image
+        {activeScore != '0' ? (
+          <View style={styles.scoreBoard}>
+            <Image
           source={rekord}
           style={{resizeMode: 'contain', flex: 0, width: 340, bottom: 130,}}
           />
-
-          <Text style={styles.text}>Hej</Text>
-
-        </View>
+            <Text style={styles.text}>{highScore}</Text>
+            {/* <Text style={styles.text}>Din senaste poäng</Text>
+            <Text style={styles.text}>{activeScore}</Text> */}
+          </View>
+        ) : (
+          <View style={styles.scoreBoard}>
+            <Text style={styles.text}>Spela för att få ett highscore </Text>
+          </View>
+        )}
 
         <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
           <Link to="/Tap">
@@ -159,13 +168,12 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   text: {
-    resizeMode: 'contain',
-    padding: 10,
-    //margin: 0,
+    //padding: 3,
+    margin: 2,
     //top: 200,
     textAlign: 'center',
     borderRadius: 30,
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: 'bold',
     //color: '#13283C',
     color: 'white',
