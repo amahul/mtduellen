@@ -29,6 +29,7 @@ const information =
 const Home = ({}) => {
   const [infoModal, setInfoModal] = useState(false);
   const [activeScore, setActiveScore] = useState('0');
+  const [highScore, setHighScore] = useState('0');
 
   closeInfo = () => {
     setInfoModal(false);
@@ -41,7 +42,8 @@ const Home = ({}) => {
   useEffect(() => {
     const fetch = async () => {
       let tempScore = await store.readData();
-      setActiveScore(tempScore);
+      setActiveScore(tempScore.activeScore);
+      setHighScore(tempScore.highScore);
     };
     fetch();
   }, []);
@@ -80,7 +82,9 @@ const Home = ({}) => {
         {activeScore != '0' ? (
           <View style={styles.scoreBoard}>
             <Text style={styles.text}>Slå ditt rekord: </Text>
-            <Text style={styles.text}>{activeScore}</Text>
+            <Text style={styles.text}>{highScore}</Text>
+            {/* <Text style={styles.text}>Din senaste poäng</Text>
+            <Text style={styles.text}>{activeScore}</Text> */}
           </View>
         ) : (
           <View style={styles.scoreBoard}>
@@ -155,12 +159,12 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   text: {
-    padding: 15,
-    margin: 5,
+    //padding: 3,
+    margin: 2,
     //top: 200,
     textAlign: 'center',
     borderRadius: 30,
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: 'bold',
     //color: '#13283C',
     color: 'white',

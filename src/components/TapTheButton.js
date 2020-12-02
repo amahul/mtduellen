@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -34,6 +34,8 @@ const TapTheButton = ({}) => {
   const [secondModal, setSecondModal] = useState(false);
 
   const [showLauncher, setShowLauncher] = useState(true);
+  //const [activeScore, setActiveScore] = useState('0');
+  const [highScore, setHighScore] = useState('0');
 
   onPress = () => {
     // change size of button and add to count
@@ -49,7 +51,19 @@ const TapTheButton = ({}) => {
   };
 
   endGame = () => {
-    store.saveData(count);
+    let myData = null;
+
+    // Save first score, or when new highscore
+    if (highScore === undefined || count > highScore) {
+      console.log('Save new highScore');
+      myData = {activeScore: count, highScore: count};
+    } else {
+      // save old highScore
+      console.log('Save old highScore');
+      myData = {activeScore: count, highScore: highScore};
+    }
+
+    store.saveData(myData);
 
     setSecondModal(true);
     setSecondTimer(false);
@@ -58,8 +72,16 @@ const TapTheButton = ({}) => {
   startLauncher = () => {
     setFirstModal(false);
     setFirstTimer(true);
-    console.log('firstTimer');
   };
+
+  useEffect(() => {
+    const fetch = async () => {
+      let tempScore = await store.readData();
+      setHighScore(tempScore.highScore);
+      console.log(tempScore.highScore);
+    };
+    fetch();
+  }, []);
 
   return (
     <View style={styles.container}>
