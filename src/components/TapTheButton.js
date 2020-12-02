@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableWithoutFeedback,
+  Button,
   ImageBackground,
   Image,
 } from 'react-native';
@@ -13,11 +14,14 @@ import {Link} from 'react-router-native';
 import Popup from './Popup';
 import Launcher from './Launcher';
 import Counter from './Counter';
-import background from '../bilder/homeBackground.png';
 import knapp from '../bilder/button2.png';
 import arrow from '../bilder/arrow.png';
 import Modal from 'react-native-modalbox';
-import play from '../bilder/play_dark.png';
+//import play from '../bilder/play_dark.png';
+import avsluta from '../bilder/avsluta.png';
+import braJobbat from '../bilder/braJobbat.png';
+
+import spelregler from '../bilder/spelregler.png';
 import { BorderlessButton } from 'react-native-gesture-handler';
 
 const store = require('./Storage');
@@ -34,6 +38,8 @@ class TapTheButton extends Component {
     showLauncher: true,
   };
 
+  //const [count, setCount] = useState("0");
+
   onPress = () => {
     // change size of button and add to count
     if (this.state.secondTimer) {
@@ -46,10 +52,11 @@ class TapTheButton extends Component {
   };
 
   startGame = () => {
-    console.log('fooo')
+    console.log('fooo');
     this.setState({
       secondTimer: true,
       showLauncher: false,
+      //firstTimer: false,
     });
   };
 
@@ -121,7 +128,8 @@ class TapTheButton extends Component {
         {/* MINIGAME CONTENT END */}
         {/* FIRST MODAL */}
         {/* {this.state.firstModal && ( */}
-        <Popup
+
+        <Popup  
           content={gameInstruction}
           button={true}
           link={false}
@@ -139,37 +147,52 @@ class TapTheButton extends Component {
           link={true}
           action="/"
         /> */}
+      
 
         <Modal
           style={styles.modal}
           backdrop={false}
           position={'center'}
           isOpen={this.state.secondModal}>
-          <Text style={{
-            fontSize:30, font: 'Barlow', top: 35,
-          }}>{endText}</Text>
+            <Image
+              source={braJobbat}
+              style={{ resizeMode: 'contain',
+              width: 200,
+              alignItems: 'flex-start',
+              height: 70,
+              bottom: 0,
+              margin: 5,
+              }} 
+              /> 
+          <Text
+            style={{
+              fontSize: 30,
+              fontWeight: 'bold',
+              top: 23,
+            }}>
+            {endText}
+          </Text>
 
           {/* <Link to="/" underlayColor="#f0f4f7">
             <Text>Nästa spel</Text>
           </Link> */}
 
-            <Link to="/">
-              <Image
-                source={play}
-                style={{width: 250, height: 70, bottom: 0, margin: 5, top: 75,}}
-              />
-            </Link>
+          <Link to="/">
+            <Image
+              source={avsluta}
+              style={{width: 250, height: 70, bottom: 0, margin: 5, top: 55}}
+            />
+          </Link>
         </Modal>
 
         {/* )} */}
         {/* LAUNCHER */}
-        {/* showLauncher problem */}
-        {this.state.showLauncher ? (
+        {this.state.showLauncher && (
           <Launcher
             running={this.state.firstTimer}
             startGame={this.startGame}
           />
-        ) : null}
+        )}
       </View>
     );
   }

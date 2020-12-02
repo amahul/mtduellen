@@ -4,7 +4,15 @@ const saveData = async (value) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem('userData', jsonValue);
-    alert('Värdet har sparats: ' + value);
+  } catch (e) {
+    alert(e);
+  }
+};
+
+const saveHighScore = async (value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem('userHighScore', jsonValue);
   } catch (e) {
     alert(e);
   }
@@ -19,9 +27,14 @@ const readData = async () => {
   }
 };
 
-// useEffect(() => {
-//   readData()
-// }, [])
+const readHighScore = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('userHighScore');
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    alert(e);
+  }
+};
 
 const clearStorage = async () => {
   try {
@@ -32,4 +45,4 @@ const clearStorage = async () => {
   }
 };
 
-module.exports = {readData, saveData};
+module.exports = {readData, saveData, saveHighScore, readHighScore};

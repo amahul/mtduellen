@@ -1,7 +1,11 @@
 import React from 'react';
-import {Text, Button, StyleSheet} from 'react-native';
+import {Text, Button, StyleSheet, Image} from 'react-native';
 import Modal from 'react-native-modalbox';
 import {Link} from 'react-router-native';
+import spelregler from '../bilder/spelregler.png';
+import spela from '../bilder/spela.png';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+
 
 // component CountryInfo
 const Popup = ({content, modalState, action, button, link}) => {
@@ -11,14 +15,33 @@ const Popup = ({content, modalState, action, button, link}) => {
       backdrop={false}
       position={'center'}
       isOpen={modalState}>
+      <Image
+              source={spelregler}
+              style={{ resizeMode: 'contain', width: 200,
+              alignItems: 'flex-start',
+              height: 70,
+              bottom: 25,
+              margin: 5,
+              }} 
+              /> 
       <Text style={styles.text}>{content}</Text>
 
-      {button && <Button onPress={() => action()} title="Kör igång" />}
+      {/* {button && <Button onPress={() => action()} title="Kör igång" />}
       {link && (
         <Link to={action} underlayColor="#f0f4f7">
           <Text>Nästa spel</Text>
         </Link>
-      )}
+      )} */}
+    
+    
+
+          <TouchableWithoutFeedback onPress={()=> action()}
+          style={{top:30}}>
+            <Image
+              source={spela}
+              style={{width: 250, height: 70, bottom: 0, margin: 5, top: 0}}
+            />
+          </TouchableWithoutFeedback>
 
       {link && (
         <Link to={action} underlayColor="#f0f4f7">

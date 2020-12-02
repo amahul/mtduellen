@@ -1,7 +1,6 @@
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-// import './Storage.js';
-// const store = require('./Storage'); // Ska dessa vara kvar?
+const store = require('./Storage');
 
 import {
   ImageBackground,
@@ -19,89 +18,103 @@ import {Link} from 'react-router-native';
 import logo2 from '../bilder/logo_alt2.png';
 import highscores from '../bilder/highscore_dark.png';
 import highscoresExpanded from '../bilder/highscores_expanded.png';
-import play from '../bilder/play_dark.png';
-const store = require('./Storage');
+import spela from '../bilder/spela.png';
+import rekord from '../bilder/rekord.png';
+import logo3 from '../bilder/logo_mtduellen.png';
+
+
 
 import Info from './Info';
+import {greaterThan} from 'react-native-reanimated';
 const information =
   'Välkommen till MT-Duellen! Tävla i appen och vinn fina priser på mässdagen. Det är endast MT-studenter som kan delta i tävlingen';
 
 const Home = ({}) => {
-  const [infoModal, setInfoModal] = useState(false)
-
-  openInfo = () => {
-    setInfoModal(true)
-  };
+  const [infoModal, setInfoModal] = useState(false);
 
   closeInfo = () => {
-    setInfoModal(false)
+    setInfoModal(false);
+  };
+
+  openInfo = () => {
+    setInfoModal(true);
   };
 
   useEffect(() => {
     const fetch = async () => {
       let activeScore = await store.readData();
       console.log(activeScore);
-    }
-    fetch()
-  }, [])
+    };
+    fetch();
+  }, []);
 
-    return (
-      <ImageBackground style={styles.imageBackground}>
-        <View style={styles.infoBtnHolder}>
-          <TouchableOpacity
-            style={styles.infoBtn}
-            activeOpacity={0.5}
-            onPress={this.openInfo}
-            //style={styles.infoBtn}
-            title="Info">
-            <Image
-              source={icon}
-              style={{width: 70, height: 70, bottom: 0, margin: 30}}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.container}>
-          <View style={styles.logoContainer}>
-            <Image source={logo2} style={styles.imgFlex} />
-          </View>
-          <View style={styles.imgFlex2}>
-            <Image
-              source={highscoresExpanded}
-              style={{
-                resizeMode: 'stretch',
-                width: 400,
-                height: 400,
-                margin: 5,
-              }}
-            />
-          </View>
-
-          <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
-            <Link to="/Tap">
-              <Image
-                source={play}
-                style={{width: 300, height: 70, bottom: 0, margin: 5}}
-              />
-            </Link>
-          </TouchableOpacity>
-
-          {/* INFO MODAL */}
-          <Info
-            information={information}
-            modalState={infoModal}
-            closeInfo={closeInfo}
+  return (
+    <ImageBackground style={styles.imageBackground}>
+      <View style={styles.infoBtnHolder}>
+        <TouchableOpacity
+          style={styles.infoBtn}
+          activeOpacity={0.5}
+          onPress={openInfo}
+          title="Info">
+          <Image
+            source={icon}
+            style={{width: 70, height: 70, bottom: 0, margin: 30}}
           />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.container}>
+        <View style={styles.logoContainer}>
+          <Image source={logo3} style={styles.imgFlex} />
         </View>
-      </ImageBackground>
-    );
-}
+        {/* <View style={styles.imgFlex2}>
+          {/* <Image
+            source={highscoresExpanded}
+            style={{
+              resizeMode: 'stretch',
+              width: 400,
+              height: 400,
+              margin: 5,
+            }}
+          /> 
+          
+        </View> */}
+
+        <View style={styles.scoreBoard}>
+          <Image
+          source={rekord}
+          style={{resizeMode: 'contain', flex: 0, width: 340, bottom: 130,}}
+          />
+
+          <Text style={styles.text}>Hej</Text>
+
+        </View>
+
+        <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
+          <Link to="/Tap">
+            <Image
+              source={spela}
+              style={{resizeMode: 'contain', width: 300, height: 100, bottom: 10, margin: 5}}
+            />
+          </Link>
+        </TouchableOpacity>
+
+        {/* INFO MODAL */}
+        <Info
+          information={information}
+          modalState={infoModal}
+          closeInfo={closeInfo}
+        />
+      </View>
+    </ImageBackground>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 3,
     alignItems: 'center',
-    alignSelf: 'stretch',
+    //alignSelf: 'stretch',
   },
   imageBackground: {
     flex: 1,
@@ -118,56 +131,46 @@ const styles = StyleSheet.create({
     padding: 0,
     opacity: 0.9,
     zIndex: 1,
+    elevation: 1,
   },
   logoContainer: {
-    top: 20,
-    height: 100,
-    flex: 1,
-    // justifyContent: 'flex-start',
-    // alignItems: 'flex-start',
-  },
-  img: {
-    width: '50%',
-    height: '50%',
-    resizeMode: 'contain',
+    flex: 2,
+    width: '100%',
+    alignItems: 'center',
   },
   imgFlex: {
     resizeMode: 'contain',
-    width: 300,
-    margin: 10,
-    // backgroundColor: 'green',
+    height: '100%',
+    width: '80%',
+    maxHeight: '100%',
+    margin: -90,
   },
-  imgFlex2: {
+  // imgFlex2: {
+  //   resizeMode: 'contain',
+  //   flex: 3,
+  //   flexDirection: 'column',
+  //   width: 300,
+  //   padding: 10,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   // backgroundColor: 'blue',
+  // },
+  scoreBoard: {
+    flex: 2,
+  },
+  text: {
     resizeMode: 'contain',
-    flex: 3,
-    flexDirection: 'column',
-    width: 300,
     padding: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    // backgroundColor: 'blue',
-  },
-  logo: {
-    width: 255,
-    height: 190,
-    top: 10,
-  },
-  text: {
-    fontSize: 30,
-    textAlign: 'center',
-  },
-  text: {
-    padding: 15,
-    margin: 5,
-    top: 200,
+    //margin: 0,
+    //top: 200,
     textAlign: 'center',
     borderRadius: 30,
     fontSize: 40,
     fontWeight: 'bold',
-    color: '#13283C',
-    lineHeight: 50,
-    fontFamily: 'serif',
-    //fontFamily: 'Helvetica Bold',
+    //color: '#13283C',
+    color: 'white',
+    lineHeight: 35,
+    //fontFamily: 'serif',
   },
 });
 
