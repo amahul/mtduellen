@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -17,7 +17,12 @@ import Counter from './Counter';
 import knapp from '../bilder/button2.png';
 import arrow from '../bilder/arrow.png';
 import Modal from 'react-native-modalbox';
-import play from '../bilder/play_dark.png';
+//import play from '../bilder/play_dark.png';
+import avsluta from '../bilder/avsluta.png';
+import braJobbat from '../bilder/braJobbat.png';
+
+import spelregler from '../bilder/spelregler.png';
+import {BorderlessButton} from 'react-native-gesture-handler';
 
 const store = require('./Storage');
 
@@ -34,6 +39,8 @@ const TapTheButton = ({}) => {
   const [secondModal, setSecondModal] = useState(false);
 
   const [showLauncher, setShowLauncher] = useState(true);
+  //const [activeScore, setActiveScore] = useState('0');
+  const [highScore, setHighScore] = useState('0');
 
   onPress = () => {
     // change size of button and add to count
@@ -49,7 +56,19 @@ const TapTheButton = ({}) => {
   };
 
   endGame = () => {
-    store.saveData(count);
+    let myData = null;
+
+    // Save first score, or when new highscore
+    if (highScore === undefined || count > highScore) {
+      console.log('Save new highScore');
+      myData = {activeScore: count, highScore: count};
+    } else {
+      // save old highScore
+      console.log('Save old highScore');
+      myData = {activeScore: count, highScore: highScore};
+    }
+
+    store.saveData(myData);
 
     setSecondModal(true);
     setSecondTimer(false);
@@ -58,8 +77,16 @@ const TapTheButton = ({}) => {
   startLauncher = () => {
     setFirstModal(false);
     setFirstTimer(true);
-    console.log('firstTimer');
   };
+
+  useEffect(() => {
+    const fetch = async () => {
+      let tempScore = await store.readData();
+      setHighScore(tempScore.highScore);
+      console.log(tempScore.highScore);
+    };
+    fetch();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -119,16 +146,28 @@ const TapTheButton = ({}) => {
           link={true}
           action="/"
         /> */}
+
       <Modal
         style={styles.modal}
         backdrop={false}
         position={'center'}
         isOpen={secondModal}>
+        <Image
+          source={braJobbat}
+          style={{
+            resizeMode: 'contain',
+            width: 200,
+            alignItems: 'flex-start',
+            height: 70,
+            bottom: 0,
+            margin: 5,
+          }}
+        />
         <Text
           style={{
             fontSize: 30,
             fontWeight: 'bold',
-            top: 35,
+            top: 23,
           }}>
           Du fick {count} poäng!
         </Text>
@@ -139,15 +178,14 @@ const TapTheButton = ({}) => {
 
         <Link to="/">
           <Image
-            source={play}
-            style={{width: 250, height: 70, bottom: 0, margin: 5, top: 75}}
+            source={avsluta}
+            style={{width: 250, height: 70, bottom: 0, margin: 5, top: 55}}
           />
         </Link>
       </Modal>
-      {/* )} */}
+
       {/* LAUNCHER */}
       {showLauncher && <Launcher running={firstTimer} startGame={startGame} />}
-      {/* <Button onPress={startGame} title="Kör igång" /> */}
     </View>
   );
 };

@@ -18,7 +18,11 @@ import {Link} from 'react-router-native';
 import logo2 from '../bilder/logo_alt2.png';
 import highscores from '../bilder/highscore_dark.png';
 import highscoresExpanded from '../bilder/highscores_expanded.png';
-import play from '../bilder/play_dark.png';
+import spela from '../bilder/spela.png';
+import rekord from '../bilder/rekord.png';
+import logo3 from '../bilder/logo_mtduellen.png';
+
+
 
 import Info from './Info';
 import {greaterThan} from 'react-native-reanimated';
@@ -29,6 +33,7 @@ const information =
 const Home = ({}) => {
   const [infoModal, setInfoModal] = useState(false);
   const [activeScore, setActiveScore] = useState('0');
+  const [highScore, setHighScore] = useState('0');
 
   closeInfo = () => {
     setInfoModal(false);
@@ -41,7 +46,8 @@ const Home = ({}) => {
   useEffect(() => {
     const fetch = async () => {
       let tempScore = await store.readData();
-      setActiveScore(tempScore);
+      setActiveScore(tempScore.activeScore);
+      setHighScore(tempScore.highScore);
     };
     fetch();
   }, []);
@@ -63,7 +69,7 @@ const Home = ({}) => {
 
       <View style={styles.container}>
         <View style={styles.logoContainer}>
-          <Image source={logo2} style={styles.imgFlex} />
+          <Image source={logo3} style={styles.imgFlex} />
         </View>
         {/* <View style={styles.imgFlex2}>
           {/* <Image
@@ -79,8 +85,13 @@ const Home = ({}) => {
         </View> */}
         {activeScore != '0' ? (
           <View style={styles.scoreBoard}>
-            <Text style={styles.text}>Slå ditt rekord: </Text>
-            <Text style={styles.text}>{activeScore}</Text>
+            <Image
+          source={rekord}
+          style={{resizeMode: 'contain', flex: 0, width: 340, bottom: 130,}}
+          />
+            <Text style={styles.text}>{highScore}</Text>
+            {/* <Text style={styles.text}>Din senaste poäng</Text>
+            <Text style={styles.text}>{activeScore}</Text> */}
           </View>
         ) : (
           <View style={styles.scoreBoard}>
@@ -91,8 +102,8 @@ const Home = ({}) => {
         <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
           <Link to="/Tap">
             <Image
-              source={play}
-              style={{width: 300, height: 70, bottom: 0, margin: 5}}
+              source={spela}
+              style={{resizeMode: 'contain', width: 300, height: 100, bottom: 10, margin: 5}}
             />
           </Link>
         </TouchableOpacity>
@@ -138,8 +149,10 @@ const styles = StyleSheet.create({
   },
   imgFlex: {
     resizeMode: 'contain',
+    height: '100%',
     width: '80%',
     maxHeight: '100%',
+    margin: -90,
   },
   // imgFlex2: {
   //   resizeMode: 'contain',
@@ -155,16 +168,16 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   text: {
-    padding: 15,
-    margin: 5,
+    //padding: 3,
+    margin: 2,
     //top: 200,
     textAlign: 'center',
     borderRadius: 30,
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: 'bold',
     //color: '#13283C',
     color: 'white',
-    lineHeight: 50,
+    lineHeight: 35,
     //fontFamily: 'serif',
   },
 });
