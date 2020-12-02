@@ -9,15 +9,6 @@ const saveData = async (values) => {
   }
 };
 
-const saveHighScore = async (value) => {
-  try {
-    const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem('userHighScore', jsonValue);
-  } catch (e) {
-    alert(e);
-  }
-};
-
 const readData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('userData');
@@ -27,22 +18,13 @@ const readData = async () => {
   }
 };
 
-const readHighScore = async () => {
-  try {
-    const jsonValue = await AsyncStorage.getItem('userHighScore');
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
-  } catch (e) {
-    alert(e);
-  }
-};
+// const clearStorage = async () => {
+//   try {
+//     await AsyncStorage.clear();
+//     alert('Storage successfully cleared!');
+//   } catch (e) {
+//     alert('Failed to clear the async storage.');
+//   }
+// };
 
-const clearStorage = async () => {
-  try {
-    await AsyncStorage.clear();
-    alert('Storage successfully cleared!');
-  } catch (e) {
-    alert('Failed to clear the async storage.');
-  }
-};
-
-module.exports = {readData, saveData, saveHighScore, readHighScore};
+module.exports = {readData, saveData};

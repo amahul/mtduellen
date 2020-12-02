@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 30,
-    //...StyleSheet.absoluteFill,
+    //height: 30,
+    ...StyleSheet.absoluteFill,
     backgroundColor: 'rgba(230,230,230,0.5)',
   },
 });
