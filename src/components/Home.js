@@ -22,8 +22,6 @@ import spela from '../bilder/spela.png';
 import rekord from '../bilder/rekord.png';
 import logo3 from '../bilder/logo_mtduellen.png';
 
-
-
 import Info from './Info';
 import {greaterThan} from 'react-native-reanimated';
 
@@ -60,10 +58,7 @@ const Home = ({}) => {
           activeOpacity={0.5}
           onPress={openInfo}
           title="Info">
-          <Image
-            source={icon}
-            style={{width: 70, height: 70, bottom: 0, margin: 30}}
-          />
+          <Image source={icon} style={{width: 80, height: 80, margin: 20}} />
         </TouchableOpacity>
       </View>
 
@@ -85,11 +80,8 @@ const Home = ({}) => {
         </View> */}
         {activeScore != '0' ? (
           <View style={styles.scoreBoard}>
-            <Image
-          source={rekord}
-          style={{resizeMode: 'contain', flex: 0, width: 340, bottom: 130,}}
-          />
-            <Text style={styles.text}>{highScore}</Text>
+            <Image source={rekord} style={styles.recordImage} />
+            <Text style={styles.textHighScore}>{highScore}</Text>
             {/* <Text style={styles.text}>Din senaste poäng</Text>
             <Text style={styles.text}>{activeScore}</Text> */}
           </View>
@@ -99,14 +91,20 @@ const Home = ({}) => {
           </View>
         )}
 
-        <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
-          <Link to="/Tap">
-            <Image
-              source={spela}
-              style={{resizeMode: 'contain', width: 300, height: 100, bottom: 10, margin: 5}}
-            />
-          </Link>
-        </TouchableOpacity>
+        <View style={styles.startBtnHolder}>
+          <TouchableOpacity activeOpacity={0.5}>
+            <Link to="/Tap" underlayColor="#13283C">
+              <Image
+                source={spela}
+                style={{
+                  resizeMode: 'contain',
+                  width: 350,
+                  //margin: 5,
+                }}
+              />
+            </Link>
+          </TouchableOpacity>
+        </View>
 
         {/* INFO MODAL */}
         <Info
@@ -121,38 +119,52 @@ const Home = ({}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 3,
+    flex: 1,
+  },
+  startBtnHolder: {
+    flex: 1,
+    //backgroundColor: 'yellow',
+    width: '100%',
     alignItems: 'center',
-    //alignSelf: 'stretch',
+    top: -60,
   },
   imageBackground: {
-    flex: 1,
+    ...StyleSheet.absoluteFill,
     resizeMode: 'cover',
     alignSelf: 'stretch',
     backgroundColor: '#13283C',
   },
   infoBtnHolder: {
-    flex: 0.4,
+    flex: 0.15,
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    //backgroundColor: 'pink',
+    // zIndex: 11,
+    // elevation: 11,
   },
   infoBtn: {
-    padding: 0,
     opacity: 0.9,
-    zIndex: 1,
-    elevation: 1,
+  },
+  recordImage: {
+    resizeMode: 'contain',
+    flex: 0,
+    top: 0,
+    width: '80%',
   },
   logoContainer: {
     flex: 2,
     width: '100%',
     alignItems: 'center',
+    //backgroundColor: 'green',
+    // zIndex: 13,
+    // elevation: 13,
   },
   imgFlex: {
     resizeMode: 'contain',
     height: '100%',
     width: '80%',
     maxHeight: '100%',
-    margin: -90,
+    top: -30,
   },
   // imgFlex2: {
   //   resizeMode: 'contain',
@@ -165,20 +177,28 @@ const styles = StyleSheet.create({
   //   // backgroundColor: 'blue',
   // },
   scoreBoard: {
+    top: -50,
     flex: 2,
+    alignItems: 'center',
+    width: '100%',
+    //backgroundColor: 'red',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
   },
   text: {
-    //padding: 3,
     margin: 2,
-    //top: 200,
     textAlign: 'center',
-    borderRadius: 30,
     fontSize: 30,
     fontWeight: 'bold',
-    //color: '#13283C',
     color: 'white',
     lineHeight: 35,
     //fontFamily: 'serif',
+  },
+  textHighScore: {
+    fontSize: 70,
+    top: -50,
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 

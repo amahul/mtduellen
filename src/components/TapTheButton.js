@@ -60,18 +60,19 @@ const TapTheButton = ({}) => {
 
     // Save first score, or when new highscore
     if (highScore === undefined || count > highScore) {
-      console.log('Save new highScore');
       myData = {activeScore: count, highScore: count};
     } else {
       // save old highScore
-      console.log('Save old highScore');
       myData = {activeScore: count, highScore: highScore};
     }
 
     store.saveData(myData);
 
-    setSecondModal(true);
     setSecondTimer(false);
+
+    setTimeout(() => {
+      setSecondModal(true);
+    }, 800);
   };
 
   startLauncher = () => {
@@ -90,7 +91,7 @@ const TapTheButton = ({}) => {
 
   return (
     <View style={styles.container}>
-      <Link to="/">
+      <Link to="/" underlayColor="#13283C">
         <Image source={arrow} style={styles.icon} />
       </Link>
       <View style={styles.counterContainer}>
@@ -100,7 +101,7 @@ const TapTheButton = ({}) => {
         {/* )} */}
       </View>
       {/* MINIGAME CONTENT */}
-      <ImageBackground style={styles.image}>
+      <View style={styles.background}>
         <TouchableWithoutFeedback onPress={onPress}>
           <View
             style={{
@@ -125,8 +126,9 @@ const TapTheButton = ({}) => {
             </ImageBackground>
           </View>
         </TouchableWithoutFeedback>
-      </ImageBackground>
+      </View>
       {/* MINIGAME CONTENT END */}
+
       {/* FIRST MODAL */}
       {/* {this.state.firstModal && ( */}
       <Popup
@@ -151,15 +153,15 @@ const TapTheButton = ({}) => {
         style={styles.modal}
         backdrop={false}
         position={'center'}
-        isOpen={secondModal}>
+        isOpen={secondModal}
+        swipeToClose={false}>
         <Image
           source={braJobbat}
           style={{
             resizeMode: 'contain',
             width: 200,
             alignItems: 'flex-start',
-            height: 70,
-            bottom: 0,
+            //height: 70,
             margin: 5,
           }}
         />
@@ -167,20 +169,14 @@ const TapTheButton = ({}) => {
           style={{
             fontSize: 30,
             fontWeight: 'bold',
-            top: 23,
           }}>
           Du fick {count} poäng!
         </Text>
-
         {/* <Link to="/" underlayColor="#f0f4f7">
             <Text>Nästa spel</Text>
           </Link> */}
-
-        <Link to="/">
-          <Image
-            source={avsluta}
-            style={{width: 250, height: 70, bottom: 0, margin: 5, top: 55}}
-          />
+        <Link to="/" underlayColor="white">
+          <Image source={avsluta} style={styles.finishBtn} />
         </Link>
       </Modal>
 
@@ -221,11 +217,11 @@ const styles = StyleSheet.create({
   },
   modal: {
     position: 'relative',
-    //backgroundColor: 'green',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     borderRadius: 10,
     height: 300,
+    padding: 20,
     width: 300,
     shadowColor: '#000',
     shadowOffset: {
@@ -243,8 +239,12 @@ const styles = StyleSheet.create({
     color: 'white',
     alignSelf: 'center',
   },
-  image: {
-    paddingTop: 20,
+  finishBtn: {
+    width: 250,
+    height: 70,
+    margin: 5,
+  },
+  background: {
     flex: 4,
     resizeMode: 'cover',
     justifyContent: 'center',
