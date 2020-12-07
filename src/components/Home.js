@@ -15,18 +15,11 @@ import icon from '../bilder/info_dark.png';
 
 import {Link} from 'react-router-native';
 
-import logo2 from '../bilder/logo_alt2.png';
-import highscores from '../bilder/highscore_dark.png';
-import highscoresExpanded from '../bilder/highscores_expanded.png';
-import spela from '../bilder/spela.png';
-import rekord from '../bilder/rekord.png';
-import logo3 from '../bilder/logo_mtduellen.png';
+import spela from '../bilder/spela_small.png';
+import rekord from '../bilder/rekord_small.png';
+import logo3 from '../bilder/logo_mtduellen_small.png';
 
 import Info from './Info';
-import {greaterThan} from 'react-native-reanimated';
-
-const information =
-  'Välkommen till MT-Duellen! Tävla i appen och vinn fina priser på mässdagen. Det är endast MT-studenter som kan delta i tävlingen';
 
 const Home = ({}) => {
   const [infoModal, setInfoModal] = useState(false);
@@ -52,32 +45,23 @@ const Home = ({}) => {
 
   return (
     <ImageBackground style={styles.imageBackground}>
-      <View style={styles.infoBtnHolder}>
-        <TouchableOpacity
-          style={styles.infoBtn}
-          activeOpacity={0.5}
-          onPress={openInfo}
-          title="Info">
-          <Image source={icon} style={{width: 80, height: 80, margin: 20}} />
-        </TouchableOpacity>
-      </View>
+      {!infoModal && (
+        <View style={styles.infoBtnHolder}>
+          <TouchableOpacity
+            style={styles.infoBtn}
+            activeOpacity={0.5}
+            onPress={openInfo}
+            title="Info">
+            <Image source={icon} style={{width: 80, height: 80, margin: 20}} />
+          </TouchableOpacity>
+        </View>
+      )}
 
       <View style={styles.container}>
         <View style={styles.logoContainer}>
           <Image source={logo3} style={styles.imgFlex} />
         </View>
-        {/* <View style={styles.imgFlex2}>
-          {/* <Image
-            source={highscoresExpanded}
-            style={{
-              resizeMode: 'stretch',
-              width: 400,
-              height: 400,
-              margin: 5,
-            }}
-          /> 
-          
-        </View> */}
+
         {activeScore != '0' ? (
           <View style={styles.scoreBoard}>
             <Image source={rekord} style={styles.recordImage} />
@@ -105,14 +89,9 @@ const Home = ({}) => {
             </Link>
           </TouchableOpacity>
         </View>
-
-        {/* INFO MODAL */}
-        <Info
-          information={information}
-          modalState={infoModal}
-          closeInfo={closeInfo}
-        />
       </View>
+      {/* INFO MODAL */}
+      <Info modalState={infoModal} closeInfo={closeInfo} />
     </ImageBackground>
   );
 };
@@ -136,14 +115,17 @@ const styles = StyleSheet.create({
   },
   infoBtnHolder: {
     flex: 0.15,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    //flexDirection: 'row',
+    //justifyContent: 'flex-end',
+    right: 0,
     //backgroundColor: 'pink',
-    // zIndex: 11,
-    // elevation: 11,
+    position: 'absolute',
+    zIndex: 11,
+    elevation: 11,
   },
   infoBtn: {
     opacity: 0.9,
+    padding: 10,
   },
   recordImage: {
     resizeMode: 'contain',
@@ -153,6 +135,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     flex: 2,
+    marginTop: 80,
     width: '100%',
     alignItems: 'center',
     //backgroundColor: 'green',
@@ -166,22 +149,12 @@ const styles = StyleSheet.create({
     maxHeight: '100%',
     top: -30,
   },
-  // imgFlex2: {
-  //   resizeMode: 'contain',
-  //   flex: 3,
-  //   flexDirection: 'column',
-  //   width: 300,
-  //   padding: 10,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   // backgroundColor: 'blue',
-  // },
+
   scoreBoard: {
     top: -50,
     flex: 2,
     alignItems: 'center',
     width: '100%',
-    //backgroundColor: 'red',
     flexDirection: 'column',
     justifyContent: 'flex-start',
   },

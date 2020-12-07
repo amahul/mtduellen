@@ -19,7 +19,7 @@ const Launcher = ({running, startGame}) => {
           borderWidth: 0,
         }}
         digitTxtStyle={{color: 'black'}}
-        timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
+        //timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
         timeToShow={['S']}
         timeLabels={{m: null, s: null}}
         running={running}

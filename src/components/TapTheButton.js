@@ -4,30 +4,23 @@ import {
   Text,
   StyleSheet,
   TouchableWithoutFeedback,
-  Button,
   ImageBackground,
   Image,
 } from 'react-native';
 
 import {Link} from 'react-router-native';
 
-import Popup from './Popup';
+import FirstModal from './FirstModal';
 import Launcher from './Launcher';
 import Counter from './Counter';
-import knapp from '../bilder/button2.png';
-import arrow from '../bilder/arrow.png';
-import Modal from 'react-native-modalbox';
-//import play from '../bilder/play_dark.png';
-import avsluta from '../bilder/avsluta.png';
-import braJobbat from '../bilder/braJobbat.png';
+import knapp from '../bilder/button2_small.png';
+import arrow from '../bilder/arrow_small.png';
 
-import spelregler from '../bilder/spelregler.png';
-import {BorderlessButton} from 'react-native-gesture-handler';
+import EndModal from './EndModal';
 
 const store = require('./Storage');
 
 const gameTimer = 5;
-const gameInstruction = 'Tryck på knappen så många gånger du kan';
 
 const TapTheButton = ({}) => {
   const [count, setCount] = useState(0);
@@ -72,7 +65,7 @@ const TapTheButton = ({}) => {
 
     setTimeout(() => {
       setSecondModal(true);
-    }, 800);
+    }, 500);
   };
 
   startLauncher = () => {
@@ -96,9 +89,13 @@ const TapTheButton = ({}) => {
       </Link>
       <View style={styles.counterContainer}>
         {/* GAME COUNTER */}
-        {/* {this.state.secondTimer && ( */}
-        <Counter seconds={gameTimer} running={secondTimer} endGame={endGame} />
-        {/* )} */}
+        {secondTimer && (
+          <Counter
+            seconds={gameTimer}
+            running={secondTimer}
+            endGame={endGame}
+          />
+        )}
       </View>
       {/* MINIGAME CONTENT */}
       <View style={styles.background}>
@@ -128,28 +125,13 @@ const TapTheButton = ({}) => {
         </TouchableWithoutFeedback>
       </View>
       {/* MINIGAME CONTENT END */}
-
       {/* FIRST MODAL */}
-      {/* {this.state.firstModal && ( */}
-      <Popup
-        content={gameInstruction}
-        button={true}
-        link={false}
-        modalState={firstModal}
-        action={startLauncher}
-      />
-      {/* )} */}
+      <FirstModal modalState={firstModal} action={startLauncher} />
       {/* SECOND MODAL */}
-      {/* {this.state.secondModal && ( */}
-      {/* <Popup
-          content={endText}
-          button={false}
-          modalState={this.state.secondModal}
-          link={true}
-          action="/"
-        /> */}
 
-      <Modal
+      <EndModal points={count} modalState={secondModal} />
+
+      {/* <Modal
         style={styles.modal}
         backdrop={false}
         position={'center'}
@@ -172,14 +154,11 @@ const TapTheButton = ({}) => {
           }}>
           Du fick {count} poäng!
         </Text>
-        {/* <Link to="/" underlayColor="#f0f4f7">
-            <Text>Nästa spel</Text>
-          </Link> */}
+
         <Link to="/" underlayColor="white">
           <Image source={avsluta} style={styles.finishBtn} />
         </Link>
-      </Modal>
-
+      </Modal> */}
       {/* LAUNCHER */}
       {showLauncher && <Launcher running={firstTimer} startGame={startGame} />}
     </View>
@@ -215,35 +194,13 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     flex: 2,
   },
-  modal: {
-    position: 'relative',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderRadius: 10,
-    height: 300,
-    padding: 20,
-    width: 300,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.36,
-    shadowRadius: 6.68,
-
-    elevation: 11,
-  },
 
   text: {
     fontSize: 40,
     color: 'white',
     alignSelf: 'center',
   },
-  finishBtn: {
-    width: 250,
-    height: 70,
-    margin: 5,
-  },
+
   background: {
     flex: 4,
     resizeMode: 'cover',
