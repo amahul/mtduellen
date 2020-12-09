@@ -4,30 +4,23 @@ import {
   Text,
   StyleSheet,
   TouchableWithoutFeedback,
-  Button,
   ImageBackground,
   Image,
 } from 'react-native';
 
 import {Link} from 'react-router-native';
 
-import Popup from './Popup';
+import FirstModal from './FirstModal';
 import Launcher from './Launcher';
 import Counter from './Counter';
-import knapp from '../bilder/button2.png';
-import arrow from '../bilder/arrow.png';
-import Modal from 'react-native-modalbox';
-//import play from '../bilder/play_dark.png';
-import avsluta from '../bilder/avsluta.png';
-import braJobbat from '../bilder/braJobbat.png';
+import knapp from '../bilder/button2_small.png';
+import arrow from '../bilder/arrow_small.png';
 
-import spelregler from '../bilder/spelregler.png';
-import {BorderlessButton} from 'react-native-gesture-handler';
+import EndModal from './EndModal';
 
 const store = require('./Storage');
 
 const gameTimer = 5;
-const gameInstruction = 'Tryck på knappen så många gånger du kan';
 
 const TapTheButton = ({}) => {
   const [count, setCount] = useState(0);
@@ -60,18 +53,19 @@ const TapTheButton = ({}) => {
 
     // Save first score, or when new highscore
     if (highScore === undefined || count > highScore) {
-      console.log('Save new highScore');
       myData = {activeScore: count, highScore: count};
     } else {
       // save old highScore
-      console.log('Save old highScore');
       myData = {activeScore: count, highScore: highScore};
     }
 
     store.saveData(myData);
 
-    setSecondModal(true);
     setSecondTimer(false);
+
+    setTimeout(() => {
+      setSecondModal(true);
+    }, 500);
   };
 
   startLauncher = () => {
@@ -90,17 +84,21 @@ const TapTheButton = ({}) => {
 
   return (
     <View style={styles.container}>
-      <Link to="/">
+      <Link to="/" underlayColor="#13283C">
         <Image source={arrow} style={styles.icon} />
       </Link>
       <View style={styles.counterContainer}>
         {/* GAME COUNTER */}
-        {/* {this.state.secondTimer && ( */}
-        <Counter seconds={gameTimer} running={secondTimer} endGame={endGame} />
-        {/* )} */}
+        {secondTimer && (
+          <Counter
+            seconds={gameTimer}
+            running={secondTimer}
+            endGame={endGame}
+          />
+        )}
       </View>
       {/* MINIGAME CONTENT */}
-      <ImageBackground style={styles.image}>
+      <View style={styles.background}>
         <TouchableWithoutFeedback onPress={onPress}>
           <View
             style={{
@@ -125,41 +123,27 @@ const TapTheButton = ({}) => {
             </ImageBackground>
           </View>
         </TouchableWithoutFeedback>
-      </ImageBackground>
+      </View>
       {/* MINIGAME CONTENT END */}
       {/* FIRST MODAL */}
-      {/* {this.state.firstModal && ( */}
-      <Popup
-        content={gameInstruction}
-        button={true}
-        link={false}
-        modalState={firstModal}
-        action={startLauncher}
-      />
-      {/* )} */}
+      <FirstModal modalState={firstModal} action={startLauncher} />
       {/* SECOND MODAL */}
-      {/* {this.state.secondModal && ( */}
-      {/* <Popup
-          content={endText}
-          button={false}
-          modalState={this.state.secondModal}
-          link={true}
-          action="/"
-        /> */}
 
-      <Modal
+      <EndModal points={count} modalState={secondModal} />
+
+      {/* <Modal
         style={styles.modal}
         backdrop={false}
         position={'center'}
-        isOpen={secondModal}>
+        isOpen={secondModal}
+        swipeToClose={false}>
         <Image
           source={braJobbat}
           style={{
             resizeMode: 'contain',
             width: 200,
             alignItems: 'flex-start',
-            height: 70,
-            bottom: 0,
+            //height: 70,
             margin: 5,
           }}
         />
@@ -167,23 +151,14 @@ const TapTheButton = ({}) => {
           style={{
             fontSize: 30,
             fontWeight: 'bold',
-            top: 23,
           }}>
           Du fick {count} poäng!
         </Text>
 
-        {/* <Link to="/" underlayColor="#f0f4f7">
-            <Text>Nästa spel</Text>
-          </Link> */}
-
-        <Link to="/">
-          <Image
-            source={avsluta}
-            style={{width: 250, height: 70, bottom: 0, margin: 5, top: 55}}
-          />
+        <Link to="/" underlayColor="white">
+          <Image source={avsluta} style={styles.finishBtn} />
         </Link>
-      </Modal>
-
+      </Modal> */}
       {/* LAUNCHER */}
       {showLauncher && <Launcher running={firstTimer} startGame={startGame} />}
     </View>
@@ -219,32 +194,14 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     flex: 2,
   },
-  modal: {
-    position: 'relative',
-    //backgroundColor: 'green',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    height: 300,
-    width: 300,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.36,
-    shadowRadius: 6.68,
-
-    elevation: 11,
-  },
 
   text: {
     fontSize: 40,
     color: 'white',
     alignSelf: 'center',
   },
-  image: {
-    paddingTop: 20,
+
+  background: {
     flex: 4,
     resizeMode: 'cover',
     justifyContent: 'center',

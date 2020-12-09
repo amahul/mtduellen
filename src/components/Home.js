@@ -15,20 +15,11 @@ import icon from '../bilder/info_dark.png';
 
 import {Link} from 'react-router-native';
 
-import logo2 from '../bilder/logo_alt2.png';
-import highscores from '../bilder/highscore_dark.png';
-import highscoresExpanded from '../bilder/highscores_expanded.png';
-import spela from '../bilder/spela.png';
-import rekord from '../bilder/rekord.png';
-import logo3 from '../bilder/logo_mtduellen.png';
-
-
+import spela from '../bilder/spela_small.png';
+import rekord from '../bilder/rekord_small.png';
+import logo3 from '../bilder/logo_mtduellen_small.png';
 
 import Info from './Info';
-import {greaterThan} from 'react-native-reanimated';
-
-const information =
-  'Välkommen till MT-Duellen! Tävla i appen och vinn fina priser på mässdagen. Det är endast MT-studenter som kan delta i tävlingen';
 
 const Home = ({}) => {
   const [infoModal, setInfoModal] = useState(false);
@@ -54,42 +45,27 @@ const Home = ({}) => {
 
   return (
     <ImageBackground style={styles.imageBackground}>
-      <View style={styles.infoBtnHolder}>
-        <TouchableOpacity
-          style={styles.infoBtn}
-          activeOpacity={0.5}
-          onPress={openInfo}
-          title="Info">
-          <Image
-            source={icon}
-            style={{width: 70, height: 70, bottom: 0, margin: 30}}
-          />
-        </TouchableOpacity>
-      </View>
+      {!infoModal && (
+        <View style={styles.infoBtnHolder}>
+          <TouchableOpacity
+            style={styles.infoBtn}
+            activeOpacity={0.5}
+            onPress={openInfo}
+            title="Info">
+            <Image source={icon} style={{width: 80, height: 80, margin: 20}} />
+          </TouchableOpacity>
+        </View>
+      )}
 
       <View style={styles.container}>
         <View style={styles.logoContainer}>
           <Image source={logo3} style={styles.imgFlex} />
         </View>
-        {/* <View style={styles.imgFlex2}>
-          {/* <Image
-            source={highscoresExpanded}
-            style={{
-              resizeMode: 'stretch',
-              width: 400,
-              height: 400,
-              margin: 5,
-            }}
-          /> 
-          
-        </View> */}
+
         {activeScore != '0' ? (
           <View style={styles.scoreBoard}>
-            <Image
-          source={rekord}
-          style={{resizeMode: 'contain', flex: 0, width: 340, bottom: 130,}}
-          />
-            <Text style={styles.text}>{highScore}</Text>
+            <Image source={rekord} style={styles.recordImage} />
+            <Text style={styles.textHighScore}>{highScore}</Text>
             {/* <Text style={styles.text}>Din senaste poäng</Text>
             <Text style={styles.text}>{activeScore}</Text> */}
           </View>
@@ -99,86 +75,103 @@ const Home = ({}) => {
           </View>
         )}
 
-        <TouchableOpacity style={{bottom: 40}} activeOpacity={0.5}>
-          <Link to="/Tap">
-            <Image
-              source={spela}
-              style={{resizeMode: 'contain', width: 300, height: 100, bottom: 10, margin: 5}}
-            />
-          </Link>
-        </TouchableOpacity>
-
-        {/* INFO MODAL */}
-        <Info
-          information={information}
-          modalState={infoModal}
-          closeInfo={closeInfo}
-        />
+        <View style={styles.startBtnHolder}>
+          <TouchableOpacity activeOpacity={0.5}>
+            <Link to="/Tap" underlayColor="#13283C">
+              <Image
+                source={spela}
+                style={{
+                  resizeMode: 'contain',
+                  width: 350,
+                  //margin: 5,
+                }}
+              />
+            </Link>
+          </TouchableOpacity>
+        </View>
       </View>
+      {/* INFO MODAL */}
+      <Info modalState={infoModal} closeInfo={closeInfo} />
     </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 3,
+    flex: 1,
+  },
+  startBtnHolder: {
+    flex: 1,
+    //backgroundColor: 'yellow',
+    width: '100%',
     alignItems: 'center',
-    //alignSelf: 'stretch',
+    top: -60,
   },
   imageBackground: {
-    flex: 1,
+    ...StyleSheet.absoluteFill,
     resizeMode: 'cover',
     alignSelf: 'stretch',
     backgroundColor: '#13283C',
   },
   infoBtnHolder: {
-    flex: 0.4,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    flex: 0.15,
+    //flexDirection: 'row',
+    //justifyContent: 'flex-end',
+    right: 0,
+    //backgroundColor: 'pink',
+    position: 'absolute',
+    zIndex: 11,
+    elevation: 11,
   },
   infoBtn: {
-    padding: 0,
     opacity: 0.9,
-    zIndex: 1,
-    elevation: 1,
+    padding: 10,
+  },
+  recordImage: {
+    resizeMode: 'contain',
+    flex: 0,
+    top: 0,
+    width: '80%',
   },
   logoContainer: {
     flex: 2,
+    marginTop: 80,
     width: '100%',
     alignItems: 'center',
+    //backgroundColor: 'green',
+    // zIndex: 13,
+    // elevation: 13,
   },
   imgFlex: {
     resizeMode: 'contain',
     height: '100%',
     width: '80%',
     maxHeight: '100%',
-    margin: -90,
+    top: -30,
   },
-  // imgFlex2: {
-  //   resizeMode: 'contain',
-  //   flex: 3,
-  //   flexDirection: 'column',
-  //   width: 300,
-  //   padding: 10,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   // backgroundColor: 'blue',
-  // },
+
   scoreBoard: {
+    top: -50,
     flex: 2,
+    alignItems: 'center',
+    width: '100%',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
   },
   text: {
-    //padding: 3,
     margin: 2,
-    //top: 200,
     textAlign: 'center',
-    borderRadius: 30,
     fontSize: 30,
     fontWeight: 'bold',
-    //color: '#13283C',
     color: 'white',
     lineHeight: 35,
     //fontFamily: 'serif',
+  },
+  textHighScore: {
+    fontSize: 70,
+    top: -50,
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 

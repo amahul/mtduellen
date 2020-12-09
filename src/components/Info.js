@@ -1,16 +1,26 @@
 import React from 'react';
-import {Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, Image, StyleSheet, View} from 'react-native';
 import Modal from 'react-native-modalbox';
-import {Link} from 'react-router-native';
+import swipeIcon from '../bilder/swipeDown_small.png';
 
-// component CountryInfo
-const Info = ({information, modalState, closeInfo}) => {
+const information =
+  'Välkommen till MT-Duellen! {"\n"} Tävla i appen och vinn fina priser på mässdagen. Det är endast MT-studenter som kan delta i tävlingen.';
+
+const Info = ({modalState, closeInfo}) => {
   return (
-    <Modal style={styles.modal} backdrop={false} isOpen={modalState}>
-      <TouchableOpacity onPress={() => closeInfo()} style={styles.closeInfoBtn}>
-        <Text style={styles.text}>x</Text>
-      </TouchableOpacity>
-      <Text style={styles.text}>{information}</Text>
+    <Modal
+      style={styles.modal}
+      backdropColor={'grey'}
+      backdrop={true}
+      isOpen={modalState}
+      onClosed={() => closeInfo()}>
+      <View style={styles.textDiv}>
+        <Text style={styles.text}>{information}</Text>
+      </View>
+      <View style={styles.closeDiv}>
+        <Text style={styles.closeText}>Svep ned för att stänga</Text>
+        <Image source={swipeIcon} style={styles.swipeIcon}></Image>
+      </View>
     </Modal>
   );
 };
@@ -18,30 +28,51 @@ const Info = ({information, modalState, closeInfo}) => {
 const styles = StyleSheet.create({
   modal: {
     position: 'relative',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    elevation: 11,
-    zIndex: 11,
+    elevation: 300,
+    zIndex: 300,
+
     width: '90%',
-    height: '90%',
+    height: '80%',
     borderRadius: 5,
+  },
+  textDiv: {
+    justifyContent: 'center',
+    flex: 1,
   },
   text: {
     fontSize: 24,
     textAlign: 'center',
     padding: 10,
   },
-  closeInfoBtn: {
-    backgroundColor: 'lightgrey',
-    borderRadius: 50,
-    width: 58,
-    height: 58,
-    right: -140,
-    top: -200,
-    fontSize: 30,
-    zIndex: 300,
-    elevation: 300,
+  swipeIcon: {
+    width: 50,
+    height: 50,
+    resizeMode: 'contain',
   },
+  closeText: {
+    fontSize: 20,
+    margin: 10,
+  },
+  closeDiv: {
+    opacity: 0.5,
+    flex: 0.15,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    width: '100%',
+  },
+  // closeInfoBtn: {
+  //   backgroundColor: 'lightgrey',
+  //   borderRadius: 50,
+  //   width: 58,
+  //   height: 58,
+  //   right: -140,
+  //   top: -200,
+  //   fontSize: 30,
+  //   zIndex: 300,
+  //   elevation: 300,
+  // },
 });
 
 export default Info;
