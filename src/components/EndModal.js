@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, StyleSheet, Image} from 'react-native';
+import {Text, View, StyleSheet, Image} from 'react-native';
 import Modal from 'react-native-modalbox';
 import {Link} from 'react-router-native';
 
@@ -25,13 +25,11 @@ const EndModal = ({modalState, points}) => {
           margin: 5,
         }}
       />
-      <Text
-        style={{
-          fontSize: 30,
-          fontWeight: 'bold',
-        }}>
-        Du fick {points} poäng!
-      </Text>
+      <View style={styles.textHolder}>
+        <Text style={styles.baseText}>Du fick </Text>
+        <Text style={styles.innerText}>{points}</Text>
+        <Text style={styles.baseText}>poäng</Text>
+      </View>
 
       <Link to="/" underlayColor="white">
         <Image source={avsluta} style={styles.finishBtn} />
@@ -59,9 +57,21 @@ const styles = StyleSheet.create({
 
     //elevation: 11,
   },
-  text: {
+  textHolder: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    //backgroundColor: 'green',
+  },
+  baseText: {
     fontSize: 30,
     textAlign: 'center',
+  },
+  innerText: {
+    fontWeight: 'bold',
+    fontSize: 45,
+    margin: 10,
   },
   finishBtn: {
     width: 250,

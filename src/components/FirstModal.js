@@ -3,7 +3,7 @@ import {Text, StyleSheet, Image} from 'react-native';
 import Modal from 'react-native-modalbox';
 
 import spelregler from '../bilder/spelregler_small.png';
-import spela from '../bilder/spela_small.png';
+import spela from '../bilder/korigang_small.png';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 const gameInstruction = 'Tryck på knappen så många gånger du kan';
