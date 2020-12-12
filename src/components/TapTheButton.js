@@ -63,9 +63,10 @@ const TapTheButton = ({}) => {
 
     setSecondTimer(false);
 
-    setTimeout(() => {
-      setSecondModal(true);
-    }, 500);
+    //setTimeout(() => {
+    setSecondModal(true);
+    console.log('test');
+    //}, 500);
   };
 
   startLauncher = () => {
