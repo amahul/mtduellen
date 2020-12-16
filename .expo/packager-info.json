@@ -1,9 +1,9 @@
 {
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://zw-cu2.anonymous.mtduellen.exp.direct",
-  "packagerNgrokUrl": "https://packager.zw-cu2.anonymous.mtduellen.exp.direct",
-  "ngrokPid": 29486,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "devToolsPort": 19002,
   "packagerPort": 19011,
-  "packagerPid": 29441
+  "packagerPid": 30267
 }
