@@ -13,7 +13,6 @@ const Launcher = ({running, startGame}) => {
           setTimeout(() => {
             startGame();
           }, 10);
-          console.log('startGame');
         }}
         digitStyle={{
           borderWidth: 0,
