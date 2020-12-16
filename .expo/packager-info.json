@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "expoServerPort": 19001,
   "expoServerNgrokUrl": "https://sc-f6t.anonymous.mtduellen.exp.direct",
   "packagerNgrokUrl": "https://packager.sc-f6t.anonymous.mtduellen.exp.direct",
@@ -7,4 +8,13 @@
   "packagerPort": 19004,
   "packagerPid": 28248,
   "webpackServerPort": null
+=======
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://zw-cu2.anonymous.mtduellen.exp.direct",
+  "packagerNgrokUrl": "https://packager.zw-cu2.anonymous.mtduellen.exp.direct",
+  "ngrokPid": 29486,
+  "devToolsPort": 19002,
+  "packagerPort": 19011,
+  "packagerPid": 29441
+>>>>>>> 2109d661247c4435845d261ea0aba7f672c9d3b9
 }
