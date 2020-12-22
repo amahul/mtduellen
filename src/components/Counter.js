@@ -8,7 +8,11 @@ const Counter = ({running, seconds, endGame}) => {
       <CountDown
         size={60}
         until={seconds}
-        onFinish={() => endGame()}
+        onFinish={() => {
+          setTimeout(() => {
+            endGame();
+          }, 10);
+        }}
         digitStyle={{
           borderWidth: 0,
         }}

@@ -65,7 +65,7 @@ const TapTheButton = ({}) => {
 
     setTimeout(() => {
       setSecondModal(true);
-    }, 500);
+    }, 700);
   };
 
   startLauncher = () => {
@@ -77,7 +77,6 @@ const TapTheButton = ({}) => {
     const fetch = async () => {
       let tempScore = await store.readData();
       setHighScore(tempScore.highScore);
-      console.log(tempScore.highScore);
     };
     fetch();
   }, []);
@@ -125,40 +124,13 @@ const TapTheButton = ({}) => {
         </TouchableWithoutFeedback>
       </View>
       {/* MINIGAME CONTENT END */}
+
       {/* FIRST MODAL */}
       <FirstModal modalState={firstModal} action={startLauncher} />
+
       {/* SECOND MODAL */}
+      {secondModal && <EndModal points={count} modalState={secondModal} />}
 
-      <EndModal points={count} modalState={secondModal} />
-
-      {/* <Modal
-        style={styles.modal}
-        backdrop={false}
-        position={'center'}
-        isOpen={secondModal}
-        swipeToClose={false}>
-        <Image
-          source={braJobbat}
-          style={{
-            resizeMode: 'contain',
-            width: 200,
-            alignItems: 'flex-start',
-            //height: 70,
-            margin: 5,
-          }}
-        />
-        <Text
-          style={{
-            fontSize: 30,
-            fontWeight: 'bold',
-          }}>
-          Du fick {count} poäng!
-        </Text>
-
-        <Link to="/" underlayColor="white">
-          <Image source={avsluta} style={styles.finishBtn} />
-        </Link>
-      </Modal> */}
       {/* LAUNCHER */}
       {showLauncher && <Launcher running={firstTimer} startGame={startGame} />}
     </View>

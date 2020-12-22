@@ -165,6 +165,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     lineHeight: 35,
+    top: 50,
     //fontFamily: 'serif',
   },
   textHighScore: {
