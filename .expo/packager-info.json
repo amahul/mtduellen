@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://y5-yuw.anonymous.mtduellen.exp.direct",
   "packagerNgrokUrl": "https://packager.y5-yuw.anonymous.mtduellen.exp.direct",
@@ -7,4 +8,8 @@
   "packagerPort": 19001,
   "packagerPid": 3928,
   "webpackServerPort": null
+=======
+  "packagerPort": null,
+  "packagerPid": null
+>>>>>>> 8b458633332b114cd3034044a199aeeaaa03e3eb
 }
