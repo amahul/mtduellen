@@ -4,7 +4,7 @@ import Modal from 'react-native-modalbox';
 import swipeIcon from '../bilder/swipeDown_small.png';
 
 const information =
-  'Välkommen till MT-Duellen!  \n \nTävla i appen och vinn fina priser på mässdagen. Det är endast MT-studenter som kan delta i tävlingen.';
+  'Välkommen till MTDuellen!  \n \nTävla i appen och vinn fina priser på mässdagen. Det är endast MT-studenter som kan delta i tävlingen.';
 
 const Info = ({modalState, closeInfo}) => {
   return (

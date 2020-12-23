@@ -1,0 +1,20 @@
+DROP TABLE IF EXIST scoreBoard;
+DROP TABLE IF EXIST users;
+
+
+CREATE TABLE scoreBoard (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  points int(11) NOT NULL,
+  username VARCHAR(50) NOT NULL,
+  user_id int(11) NOT NULL, 
+  created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE users (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

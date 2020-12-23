@@ -21,10 +21,12 @@ import logo3 from '../bilder/logo_mtduellen_small.png';
 
 import Info from './Info';
 
+// var FBLoginButton = require('./FBLoginButton');
+
 const Home = ({}) => {
   const [infoModal, setInfoModal] = useState(false);
-  const [activeScore, setActiveScore] = useState('0');
-  const [highScore, setHighScore] = useState('0');
+  const [activeScore, setActiveScore] = useState();
+  const [highScore, setHighScore] = useState();
 
   closeInfo = () => {
     setInfoModal(false);
@@ -75,6 +77,8 @@ const Home = ({}) => {
           </View>
         )}
 
+        {/* <FBLoginButton /> */}
+
         <View style={styles.startBtnHolder}>
           <TouchableOpacity activeOpacity={0.5}>
             <Link to="/Tap" underlayColor="#13283C">
@@ -107,6 +111,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     top: -60,
   },
+  startBtn: {
+    backgroundColor: '#EC6610',
+    width: '50%',
+    flex: 0.4,
+    padding: 10,
+    borderRadius: 10,
+  },
+
   imageBackground: {
     ...StyleSheet.absoluteFill,
     resizeMode: 'cover',
